@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#315744">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <title>Materiales Auxiliares - Bodega</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         CABECERA
+    ====================================================== -->
+
+    <header class="cabecera">
+
+        <div class="cabecera-contenido">
+
+            <div>
+                <h1>Materiales Auxiliares</h1>
+                <p>Control de materiales de bodega</p>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENÚ PRINCIPAL
+    ====================================================== -->
+
+    <nav class="menu-principal">
+
+        <button class="boton-menu activo"
+                data-seccion="inicio">
+            🏠
+            <span>Inicio</span>
+        </button>
+
+        <button class="boton-menu"
+                data-seccion="botellas">
+            🍾
+            <span>Botellas</span>
+        </button>
+
+        <button class="boton-menu"
+                data-seccion="corchos">
+            🪵
+            <span>Corchos</span>
+        </button>
+
+        <button class="boton-menu"
+                data-seccion="cajas">
+            📦
+            <span>Cajas</span>
+        </button>
+
+        <button class="boton-menu"
+                data-seccion="capsulas">
+            🏷️
+            <span>Cápsulas</span>
+        </button>
+
+        <button class="boton-menu"
+                data-seccion="etiquetas">
+            🏷️
+            <span>Etiquetas</span>
+        </button>
+
+    </nav>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="contenedor-principal">
+
+
+        <!-- =================================================
+             INICIO
+        ================================================== -->
+
+        <section id="seccion-inicio"
+                 class="seccion activa">
+
+            <div class="titulo-seccion">
+
+                <h2>Control de materiales auxiliares</h2>
+
+                <p>
+                    Selecciona una categoría para consultar
+                    y gestionar sus productos.
+                </p>
+
+            </div>
+
+
+            <!-- RESUMEN -->
+
+            <div class="tarjetas-resumen">
+
+                <button class="tarjeta-resumen"
+                        data-seccion="botellas">
+
+                    <div class="icono-resumen">🍾</div>
+
+                    <div>
+                        <h3>Botellas</h3>
+                        <strong id="resumen-botellas">0</strong>
+                        <span>productos</span>
+                    </div>
+
+                </button>
+
+
+                <button class="tarjeta-resumen"
+                        data-seccion="corchos">
+
+                    <div class="icono-resumen">🪵</div>
+
+                    <div>
+                        <h3>Corchos</h3>
+                        <strong id="resumen-corchos">0</strong>
+                        <span>productos</span>
+                    </div>
+
+                </button>
+
+
+                <button class="tarjeta-resumen"
+                        data-seccion="cajas">
+
+                    <div class="icono-resumen">📦</div>
+
+                    <div>
+                        <h3>Cajas</h3>
+                        <strong id="resumen-cajas">0</strong>
+                        <span>productos</span>
+                    </div>
+
+                </button>
+
+
+                <button class="tarjeta-resumen"
+                        data-seccion="capsulas">
+
+                    <div class="icono-resumen">🏷️</div>
+
+                    <div>
+                        <h3>Cápsulas</h3>
+                        <strong id="resumen-capsulas">0</strong>
+                        <span>productos</span>
+                    </div>
+
+                </button>
+
+
+                <button class="tarjeta-resumen"
+                        data-seccion="etiquetas">
+
+                    <div class="icono-resumen">🏷️</div>
+
+                    <div>
+                        <h3>Etiquetas</h3>
+                        <strong id="resumen-etiquetas">0</strong>
+                        <span>productos</span>
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <!-- COPIAS DE SEGURIDAD -->
+
+            <div class="bloque-herramientas">
+
+                <h2>💾 Copias de seguridad</h2>
+
+                <p>
+                    Guarda todos los productos, stocks e historiales
+                    en un archivo JSON.
+                </p>
+
+                <div class="botones-herramientas">
+
+                    <button id="btn-exportar-json"
+                            class="boton boton-secundario">
+
+                        📤 Exportar JSON
+
+                    </button>
+
+                    <button id="btn-importar-json"
+                            class="boton boton-secundario">
+
+                        📥 Importar JSON
+
+                    </button>
+
+                    <input type="file"
+                           id="input-importar-json"
+                           accept=".json"
+                           hidden>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOTELLAS
+        ================================================== -->
+
+        <section id="seccion-botellas"
+                 class="seccion">
+
+            <div class="cabecera-seccion">
+
+                <div>
+
+                    <h2>🍾 Botellas</h2>
+
+                    <p>
+                        Gestión de botellas y stock.
+                    </p>
+
+                </div>
+
+                <button class="boton boton-principal"
+                        id="btn-nueva-botella">
+
+                    ➕ Nueva botella
+
+                </button>
+
+            </div>
+
+
+            <!-- BUSCADOR -->
+
+            <div class="panel-busqueda">
+
+                <div class="campo-busqueda">
+
+                    <label for="buscar-botellas">
+                        🔎 Buscar
+                    </label>
+
+                    <input type="search"
+                           id="buscar-botellas"
+                           placeholder="Marca, modelo o capacidad...">
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-marca-botellas">
+                        Marca
+                    </label>
+
+                    <select id="filtro-marca-botellas">
+
+                        <option value="">Todas</option>
+
+                        <option>SAVERGLASS</option>
+                        <option>VIDRIALA</option>
+                        <option>ESLA</option>
+                        <option>VERALLIA</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-capacidad-botellas">
+                        Capacidad
+                    </label>
+
+                    <select id="filtro-capacidad-botellas">
+
+                        <option value="">Todas</option>
+
+                        <option value="0.5">0.5 L</option>
+                        <option value="0.75">0.75 L</option>
+                        <option value="1.5">1.5 L</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORMULARIO -->
+
+            <div id="formulario-botellas"
+                 class="panel-formulario oculto">
+
+                <h3 id="titulo-formulario-botellas">
+                    Nueva botella
+                </h3>
+
+                <div class="formulario-grid">
+
+                    <div class="campo">
+
+                        <label for="botella-marca">
+                            Marca
+                        </label>
+
+                        <select id="botella-marca">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>SAVERGLASS</option>
+                            <option>VIDRIALA</option>
+                            <option>ESLA</option>
+                            <option>VERALLIA</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="botella-modelo">
+                            Modelo
+                        </label>
+
+                        <select id="botella-modelo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Premiere</option>
+                            <option>Vino Santo</option>
+                            <option>Dogma Asia</option>
+                            <option>Ancienne 2</option>
+                            <option>BD Clara</option>
+                            <option>BD Reserva</option>
+                            <option>Cónica Pesante</option>
+                            <option>BD MG Plus</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="botella-capacidad">
+                            Capacidad
+                        </label>
+
+                        <select id="botella-capacidad">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option value="0.5">0.5 L</option>
+                            <option value="0.75">0.75 L</option>
+                            <option value="1.5">1.5 L</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="botella-stock">
+                            Stock inicial
+                        </label>
+
+                        <input type="number"
+                               id="botella-stock"
+                               min="0"
+                               step="1"
+                               value="0">
+
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button class="boton boton-principal"
+                            id="guardar-botella">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button class="boton boton-cancelar"
+                            id="cancelar-botella">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLA -->
+
+            <div class="panel-tabla">
+
+                <div class="tabla-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Capacidad</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-botellas">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTORIAL -->
+
+            <div class="panel-historial">
+
+                <div class="cabecera-historial">
+
+                    <div>
+
+                        <h3>📋 Historial</h3>
+
+                        <p>
+                            Entradas y consumos de botellas.
+                        </p>
+
+                    </div>
+
+                    <button class="boton boton-peligro"
+                            id="limpiar-historial-botellas">
+
+                        🗑️ Limpiar historial
+
+                    </button>
+
+                </div>
+
+                <div id="historial-botellas"
+                     class="lista-historial">
+
+                </div>
+
+            </div>
+
+
+            <!-- PDF -->
+
+            <div class="panel-exportacion">
+
+                <h3>📄 Exportar PDF</h3>
+
+                <button class="boton boton-secundario"
+                        id="pdf-botellas">
+
+                    📄 Todos los productos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CORCHOS
+        ================================================== -->
+
+        <section id="seccion-corchos"
+                 class="seccion">
+
+            <div class="cabecera-seccion">
+
+                <div>
+
+                    <h2>🪵 Corchos</h2>
+
+                    <p>
+                        Gestión de corchos y stock.
+                    </p>
+
+                </div>
+
+                <button class="boton boton-principal"
+                        id="btn-nuevo-corcho">
+
+                    ➕ Nuevo corcho
+
+                </button>
+
+            </div>
+
+
+            <div class="panel-busqueda">
+
+                <div class="campo-busqueda">
+
+                    <label for="buscar-corchos">
+                        🔎 Buscar
+                    </label>
+
+                    <input type="search"
+                           id="buscar-corchos"
+                           placeholder="Marca, modelo o tipo...">
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-marca-corchos">
+                        Marca
+                    </label>
+
+                    <select id="filtro-marca-corchos">
+
+                        <option value="">Todas</option>
+
+                        <option>BOURRASSE</option>
+                        <option>AMORIN CORK</option>
+                        <option>J. VIGAS</option>
+                        <option>EBROCORK</option>
+                        <option>INDECORK</option>
+                        <option>PARRAMON</option>
+                        <option>CORTICIERA</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-tipo-corchos">
+                        Tipo
+                    </label>
+
+                    <select id="filtro-tipo-corchos">
+
+                        <option value="">Todos</option>
+
+                        <option>1+1</option>
+                        <option>2+2</option>
+                        <option>Natural</option>
+                        <option>Silicona</option>
+                        <option>Colmatado</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div id="formulario-corchos"
+                 class="panel-formulario oculto">
+
+                <h3 id="titulo-formulario-corchos">
+                    Nuevo corcho
+                </h3>
+
+                <div class="formulario-grid">
+
+                    <div class="campo">
+
+                        <label for="corcho-marca">
+                            Marca
+                        </label>
+
+                        <select id="corcho-marca">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>BOURRASSE</option>
+                            <option>AMORIN CORK</option>
+                            <option>J. VIGAS</option>
+                            <option>EBROCORK</option>
+                            <option>INDECORK</option>
+                            <option>PARRAMON</option>
+                            <option>CORTICIERA</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="corcho-modelo">
+                            Modelo
+                        </label>
+
+                        <select id="corcho-modelo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>24 Mozas</option>
+                            <option>Madremia</option>
+                            <option>Abracadabra</option>
+                            <option>Platón</option>
+                            <option>El Principito</option>
+                            <option>Toro</option>
+                            <option>Otros</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="corcho-tipo">
+                            Tipo
+                        </label>
+
+                        <select id="corcho-tipo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>1+1</option>
+                            <option>2+2</option>
+                            <option>Natural</option>
+                            <option>Silicona</option>
+                            <option>Colmatado</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="corcho-stock">
+                            Stock inicial
+                        </label>
+
+                        <input type="number"
+                               id="corcho-stock"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button class="boton boton-principal"
+                            id="guardar-corcho">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button class="boton boton-cancelar"
+                            id="cancelar-corcho">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-tabla">
+
+                <div class="tabla-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Tipo</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-corchos">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-historial">
+
+                <div class="cabecera-historial">
+
+                    <div>
+
+                        <h3>📋 Historial</h3>
+
+                        <p>
+                            Entradas y consumos de corchos.
+                        </p>
+
+                    </div>
+
+                    <button class="boton boton-peligro"
+                            id="limpiar-historial-corchos">
+
+                        🗑️ Limpiar historial
+
+                    </button>
+
+                </div>
+
+                <div id="historial-corchos"
+                     class="lista-historial">
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-exportacion">
+
+                <h3>📄 Exportar PDF</h3>
+
+                <button class="boton boton-secundario"
+                        id="pdf-corchos">
+
+                    📄 Todos los productos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CAJAS
+        ================================================== -->
+
+        <section id="seccion-cajas"
+                 class="seccion">
+
+            <div class="cabecera-seccion">
+
+                <div>
+
+                    <h2>📦 Cajas</h2>
+
+                    <p>
+                        Gestión de cajas, estuches y maletines.
+                    </p>
+
+                </div>
+
+                <button class="boton boton-principal"
+                        id="btn-nueva-caja">
+
+                    ➕ Nueva caja
+
+                </button>
+
+            </div>
+
+
+            <div class="panel-busqueda">
+
+                <div class="campo-busqueda">
+
+                    <label for="buscar-cajas">
+                        🔎 Buscar
+                    </label>
+
+                    <input type="search"
+                           id="buscar-cajas"
+                           placeholder="Marca, modelo o tipo...">
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-marca-cajas">
+                        Marca
+                    </label>
+
+                    <select id="filtro-marca-cajas">
+
+                        <option value="">Todas</option>
+
+                        <option>SAN CAYETANO</option>
+                        <option>SYS OENOLOGICA</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-tipo-cajas">
+                        Tipo
+                    </label>
+
+                    <select id="filtro-tipo-cajas">
+
+                        <option value="">Todos</option>
+
+                        <option>Caja</option>
+                        <option>Estuche</option>
+                        <option>Maletín</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div id="formulario-cajas"
+                 class="panel-formulario oculto">
+
+                <h3 id="titulo-formulario-cajas">
+                    Nueva caja
+                </h3>
+
+                <div class="formulario-grid">
+
+                    <div class="campo">
+
+                        <label for="caja-marca">
+                            Marca
+                        </label>
+
+                        <select id="caja-marca">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>SAN CAYETANO</option>
+                            <option>SYS OENOLOGICA</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="caja-tipo">
+                            Tipo
+                        </label>
+
+                        <select id="caja-tipo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Caja</option>
+                            <option>Estuche</option>
+                            <option>Maletín</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="caja-modelo">
+                            Modelo
+                        </label>
+
+                        <select id="caja-modelo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Platón</option>
+                            <option>Abracadabra</option>
+                            <option>Madremia</option>
+                            <option>24 Mozas</option>
+                            <option>Loquillo Tinto</option>
+                            <option>Encomienda de la Vega</option>
+                            <option>El Principito</option>
+                            <option>Loquillo Verdejo</option>
+                            <option>Vocablos</option>
+                            <option>Mixto</option>
+                            <option>Individual</option>
+                            <option>MG Genérica</option>
+                            <option>Otros</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="caja-unidades">
+                            Unidades
+                        </label>
+
+                        <select id="caja-unidades">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option value="12">12 botellas</option>
+                            <option value="6">6 botellas</option>
+                            <option value="3">3 botellas</option>
+                            <option value="2">2 botellas</option>
+                            <option value="1">1 botella</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="caja-stock">
+                            Stock inicial
+                        </label>
+
+                        <input type="number"
+                               id="caja-stock"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button class="boton boton-principal"
+                            id="guardar-caja">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button class="boton boton-cancelar"
+                            id="cancelar-caja">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-tabla">
+
+                <div class="tabla-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Unidades</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-cajas">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-historial">
+
+                <div class="cabecera-historial">
+
+                    <div>
+
+                        <h3>📋 Historial</h3>
+
+                        <p>
+                            Entradas y consumos de cajas.
+                        </p>
+
+                    </div>
+
+                    <button class="boton boton-peligro"
+                            id="limpiar-historial-cajas">
+
+                        🗑️ Limpiar historial
+
+                    </button>
+
+                </div>
+
+                <div id="historial-cajas"
+                     class="lista-historial">
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-exportacion">
+
+                <h3>📄 Exportar PDF</h3>
+
+                <button class="boton boton-secundario"
+                        id="pdf-cajas">
+
+                    📄 Todos los productos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CAPSULAS
+        ================================================== -->
+
+        <section id="seccion-capsulas"
+                 class="seccion">
+
+            <div class="cabecera-seccion">
+
+                <div>
+
+                    <h2>🏷️ Cápsulas</h2>
+
+                    <p>
+                        Gestión de cápsulas y stock.
+                    </p>
+
+                </div>
+
+                <button class="boton boton-principal"
+                        id="btn-nueva-capsula">
+
+                    ➕ Nueva cápsula
+
+                </button>
+
+            </div>
+
+
+            <div class="panel-busqueda">
+
+                <div class="campo-busqueda">
+
+                    <label for="buscar-capsulas">
+                        🔎 Buscar
+                    </label>
+
+                    <input type="search"
+                           id="buscar-capsulas"
+                           placeholder="Marca, modelo o tipo...">
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-marca-capsulas">
+                        Marca
+                    </label>
+
+                    <select id="filtro-marca-capsulas">
+
+                        <option value="">Todas</option>
+
+                        <option>RAMONDIN</option>
+                        <option>EXCELLENT CORK</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-tipo-capsulas">
+                        Tipo
+                    </label>
+
+                    <select id="filtro-tipo-capsulas">
+
+                        <option value="">Todos</option>
+
+                        <option>Complejo</option>
+                        <option>Estaño</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div id="formulario-capsulas"
+                 class="panel-formulario oculto">
+
+                <h3 id="titulo-formulario-capsulas">
+                    Nueva cápsula
+                </h3>
+
+                <div class="formulario-grid">
+
+                    <div class="campo">
+
+                        <label for="capsula-marca">
+                            Marca
+                        </label>
+
+                        <select id="capsula-marca">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>RAMONDIN</option>
+                            <option>EXCELLENT CORK</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="capsula-tipo">
+                            Tipo
+                        </label>
+
+                        <select id="capsula-tipo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Complejo</option>
+                            <option>Estaño</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="capsula-modelo">
+                            Modelo
+                        </label>
+
+                        <select id="capsula-modelo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Platón</option>
+                            <option>Abracadabra</option>
+                            <option>Madremia</option>
+                            <option>24 Mozas</option>
+                            <option>Loquillo Tinto</option>
+                            <option>Encomienda de la Vega</option>
+                            <option>El Principito</option>
+                            <option>Loquillo Verdejo</option>
+                            <option>Vocablos</option>
+                            <option>MG Abracadabra</option>
+                            <option>MG Madremia</option>
+                            <option>MG 24 Mozas</option>
+                            <option>Negro Génerico</option>
+                            <option>Otros</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="capsula-stock">
+                            Stock inicial
+                        </label>
+
+                        <input type="number"
+                               id="capsula-stock"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button class="boton boton-principal"
+                            id="guardar-capsula">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button class="boton boton-cancelar"
+                            id="cancelar-capsula">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-tabla">
+
+                <div class="tabla-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-capsulas">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-historial">
+
+                <div class="cabecera-historial">
+
+                    <div>
+
+                        <h3>📋 Historial</h3>
+
+                        <p>
+                            Entradas y consumos de cápsulas.
+                        </p>
+
+                    </div>
+
+                    <button class="boton boton-peligro"
+                            id="limpiar-historial-capsulas">
+
+                        🗑️ Limpiar historial
+
+                    </button>
+
+                </div>
+
+                <div id="historial-capsulas"
+                     class="lista-historial">
+
+                </div>
+
+            </div>
+
+
+            <div class="panel-exportacion">
+
+                <h3>📄 Exportar PDF</h3>
+
+                <button class="boton boton-secundario"
+                        id="pdf-capsulas">
+
+                    📄 Todos los productos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ETIQUETAS
+        ================================================== -->
+
+        <section id="seccion-etiquetas"
+                 class="seccion">
+
+            <div class="cabecera-seccion">
+
+                <div>
+
+                    <h2>🏷️ Etiquetas</h2>
+
+                    <p>
+                        Gestión de etiquetas delanteras y traseras.
+                    </p>
+
+                </div>
+
+                <button class="boton boton-principal"
+                        id="btn-nueva-etiqueta">
+
+                    ➕ Nueva etiqueta
+
+                </button>
+
+            </div>
+
+
+            <!-- FILTROS -->
+
+            <div class="panel-busqueda">
+
+                <div class="campo-busqueda">
+
+                    <label for="buscar-etiquetas">
+                        🔎 Buscar
+                    </label>
+
+                    <input type="search"
+                           id="buscar-etiquetas"
+                           placeholder="Marca, modelo, añada o lote...">
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-marca-etiquetas">
+                        Marca
+                    </label>
+
+                    <select id="filtro-marca-etiquetas">
+
+                        <option value="">Todas</option>
+
+                        <option>BACIGALUPE HNOS.</option>
+                        <option>AGRAF S.A.U.</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-tipo-etiquetas">
+                        Tipo
+                    </label>
+
+                    <select id="filtro-tipo-etiquetas">
+
+                        <option value="">Todos</option>
+
+                        <option>Delantera</option>
+                        <option>Trasera</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-filtro">
+
+                    <label for="filtro-anada-etiquetas">
+                        Añada
+                    </label>
+
+                    <input type="number"
+                           id="filtro-anada-etiquetas"
+                           placeholder="Ej. 2025">
+
+                </div>
+
+            </div>
+
+
+            <!-- FORMULARIO -->
+
+            <div id="formulario-etiquetas"
+                 class="panel-formulario oculto">
+
+                <h3 id="titulo-formulario-etiquetas">
+                    Nueva etiqueta
+                </h3>
+
+                <div class="formulario-grid">
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-marca">
+                            Marca
+                        </label>
+
+                        <select id="etiqueta-marca">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>BACIGALUPE HNOS.</option>
+                            <option>AGRAF S.A.U.</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-tipo">
+                            Tipo
+                        </label>
+
+                        <select id="etiqueta-tipo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Delantera</option>
+                            <option>Trasera</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-modelo">
+                            Modelo
+                        </label>
+
+                        <select id="etiqueta-modelo">
+
+                            <option value="">Seleccionar...</option>
+
+                            <option>Platón</option>
+                            <option>Abracadabra</option>
+                            <option>Madremia</option>
+                            <option>24 Mozas</option>
+                            <option>Loquillo Tinto</option>
+                            <option>Encomienda de la Vega</option>
+                            <option>El Principito</option>
+                            <option>Loquillo Verdejo</option>
+                            <option>Vocablos</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-anada">
+                            Añada
+                        </label>
+
+                        <input type="number"
+                               id="etiqueta-anada"
+                               min="1900"
+                               max="2100"
+                               placeholder="Ej. 2025">
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-lote">
+                            Lote
+                        </label>
+
+                        <input type="text"
+                               id="etiqueta-lote"
+                               placeholder="Escribir lote">
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="etiqueta-stock">
+                            Stock inicial
+                        </label>
+
+                        <input type="number"
+                               id="etiqueta-stock"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                </div>
+
+
+                <div class="acciones-formulario">
+
+                    <button class="boton boton-principal"
+                            id="guardar-etiqueta">
+
+                        💾 Guardar
+
+                    </button>
+
+                    <button class="boton boton-cancelar"
+                            id="cancelar-etiqueta">
+
+                        Cancelar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLA -->
+
+            <div class="panel-tabla">
+
+                <div class="tabla-scroll">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Añada</th>
+                                <th>Lote</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla-etiquetas">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTORIAL -->
+
+            <div class="panel-historial">
+
+                <div class="cabecera-historial">
+
+                    <div>
+
+                        <h3>📋 Historial</h3>
+
+                        <p>
+                            Entradas y consumos de etiquetas.
+                        </p>
+
+                    </div>
+
+                    <button class="boton boton-peligro"
+                            id="limpiar-historial-etiquetas">
+
+                        🗑️ Limpiar historial
+
+                    </button>
+
+                </div>
+
+                <div id="historial-etiquetas"
+                     class="lista-historial">
+
+                </div>
+
+            </div>
+
+
+            <!-- PDF -->
+
+            <div class="panel-exportacion">
+
+                <h3>📄 Exportar PDF</h3>
+
+                <button class="boton boton-secundario"
+                        id="pdf-etiquetas">
+
+                    📄 Todos los productos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         MODAL DE MOVIMIENTO
+    ====================================================== -->
+
+    <div id="modal-movimiento"
+         class="modal oculto">
+
+        <div class="modal-contenido">
+
+            <div class="modal-cabecera">
+
+                <h2 id="titulo-modal-movimiento">
+                    Movimiento de stock
+                </h2>
+
+                <button id="cerrar-modal-movimiento"
+                        class="boton-cerrar">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+
+            <div class="informacion-producto">
+
+                <strong id="modal-producto-nombre">
+                    Producto
+                </strong>
+
+                <span>
+                    Stock actual:
+                    <b id="modal-stock-actual">0</b>
+                </span>
+
+            </div>
+
+
+            <div class="selector-movimiento">
+
+                <button id="tipo-entrada"
+                        class="tipo-movimiento activo">
+
+                    ➕ Entrada
+
+                </button>
+
+                <button id="tipo-consumo"
+                        class="tipo-movimiento">
+
+                    ➖ Consumo
+
+                </button>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="cantidad-movimiento">
+                    Cantidad
+                </label>
+
+                <input type="number"
+                       id="cantidad-movimiento"
+                       min="1"
+                       step="1"
+                       placeholder="Cantidad">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="observacion-movimiento">
+                    Observación
+                </label>
+
+                <textarea id="observacion-movimiento"
+                          rows="3"
+                          placeholder="Observación opcional..."></textarea>
+
+            </div>
+
+
+            <div class="acciones-modal">
+
+                <button id="guardar-movimiento"
+                        class="boton boton-principal">
+
+                    💾 Guardar movimiento
+
+                </button>
+
+                <button id="cancelar-movimiento"
+                        class="boton boton-cancelar">
+
+                    Cancelar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL DE CONFIRMACIÓN
+    ====================================================== -->
+
+    <div id="modal-confirmacion"
+         class="modal oculto">
+
+        <div class="modal-contenido modal-confirmacion">
+
+            <div class="modal-cabecera">
+
+                <h2>⚠️ Confirmar</h2>
+
+                <button id="cerrar-modal-confirmacion"
+                        class="boton-cerrar">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+            <p id="texto-confirmacion">
+                ¿Estás seguro?
+            </p>
+
+            <div class="acciones-modal">
+
+                <button id="confirmar-accion"
+                        class="boton boton-peligro">
+
+                    Sí, continuar
+
+                </button>
+
+                <button id="cancelar-confirmacion"
+                        class="boton boton-cancelar">
+
+                    Cancelar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PIE
+    ====================================================== -->
+
+    <footer class="pie">
+
+        <p>
+            Materiales Auxiliares · Gestión de Bodega
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
