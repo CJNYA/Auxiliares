@@ -546,6 +546,13 @@ function abrirFormularioBotella(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById(
+    "botella-caracteristicas"
+).value =
+    producto
+        ? (producto.caracteristicas || "")
+        : "";
+
 
     formulario.scrollIntoView({
         behavior: "smooth",
@@ -584,6 +591,11 @@ function guardarBotella() {
                 "botella-stock"
             ).value
         );
+
+        const caracteristicas =
+    document.getElementById(
+        "botella-caracteristicas"
+    ).value.trim();
 
 
     if (!marca || !modelo || !capacidad) {
@@ -627,6 +639,10 @@ function guardarBotella() {
         producto.marca = marca;
         producto.modelo = modelo;
         producto.capacidad = capacidad;
+        producto.caracteristicas = caracteristicas;
+        if (!actualizarStockInicialDesdeProducto("botellas", producto, stock)) {
+    return;
+}
 
         /*
          * Al editar no se modifica el stock
@@ -657,6 +673,8 @@ function guardarBotella() {
         capacidad: capacidad,
 
         stock: stock,
+
+        caracteristicas: caracteristicas,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -717,6 +735,10 @@ function cerrarFormularioBotella() {
     document.getElementById(
         "botella-stock"
     ).value = 0;
+
+    document.getElementById(
+    "botella-caracteristicas"
+).value = "";
 }
 
 
@@ -762,7 +784,10 @@ function dibujarBotellas() {
                     " " +
                     producto.modelo +
                     " " +
-                    producto.capacidad
+                    producto.capacidad +
+
+                    " " +
+                   (producto.caracteristicas || "")
 
                 ).toLowerCase();
 
@@ -797,7 +822,7 @@ function dibujarBotellas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="5"
+                <td colspan="6"
                     style="text-align:center;padding:30px;">
                     No hay botellas para mostrar.
                 </td>
@@ -830,6 +855,10 @@ function dibujarBotellas() {
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
                         </td>
+
+                        <td>
+    ${escaparHTML(producto.caracteristicas || "")}
+</td>
 
                         <td>
 
@@ -1004,6 +1033,13 @@ function abrirFormularioCorcho(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById(
+    "corcho-caracteristicas"
+).value =
+    producto
+        ? (producto.caracteristicas || "")
+        : "";
+
 
     document
         .getElementById("formulario-corchos")
@@ -1045,6 +1081,11 @@ function guardarCorcho() {
             ).value
         );
 
+        const caracteristicas =
+    document.getElementById(
+        "corcho-caracteristicas"
+    ).value.trim();
+
 
     if (!marca || !modelo || !tipo) {
 
@@ -1082,6 +1123,10 @@ function guardarCorcho() {
         producto.marca = marca;
         producto.modelo = modelo;
         producto.tipo = tipo;
+        producto.caracteristicas = caracteristicas;
+        if (!actualizarStockInicialDesdeProducto("corchos", producto, stock)) {
+    return;
+}
 
 
         cerrarFormularioCorcho();
@@ -1105,6 +1150,8 @@ function guardarCorcho() {
         tipo: tipo,
 
         stock: stock,
+
+        caracteristicas: caracteristicas,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -1163,6 +1210,10 @@ function cerrarFormularioCorcho() {
     document.getElementById(
         "corcho-stock"
     ).value = 0;
+
+    document.getElementById(
+    "corcho-caracteristicas"
+).value = "";
 }
 
 
@@ -1208,7 +1259,9 @@ function dibujarCorchos() {
                     " " +
                     producto.modelo +
                     " " +
-                    producto.tipo
+                    producto.tipo +
+                    " " +
+                   (producto.caracteristicas || "")
 
                 ).toLowerCase();
 
@@ -1234,7 +1287,7 @@ function dibujarCorchos() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="5"
+                <td colspan="6"
                     style="text-align:center;padding:30px;">
                     No hay corchos para mostrar.
                 </td>
@@ -1267,6 +1320,10 @@ function dibujarCorchos() {
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
                         </td>
+
+                        <td>
+    ${escaparHTML(producto.caracteristicas || "")}
+</td>
 
                         <td>
 
@@ -1445,6 +1502,13 @@ function abrirFormularioCaja(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById(
+    "caja-caracteristicas"
+).value =
+    producto
+        ? (producto.caracteristicas || "")
+        : "";
+
 
     document
         .getElementById("formulario-cajas")
@@ -1492,6 +1556,11 @@ function guardarCaja() {
             ).value
         );
 
+        const caracteristicas =
+    document.getElementById(
+        "caja-caracteristicas"
+    ).value.trim();
+
 
     if (!marca || !tipo || !modelo || !unidades) {
 
@@ -1530,6 +1599,10 @@ function guardarCaja() {
         producto.tipo = tipo;
         producto.modelo = modelo;
         producto.unidades = unidades;
+        producto.caracteristicas = caracteristicas;
+        if (!actualizarStockInicialDesdeProducto("cajas", producto, stock)) {
+    return;
+}
 
 
         cerrarFormularioCaja();
@@ -1555,6 +1628,8 @@ function guardarCaja() {
         unidades: unidades,
 
         stock: stock,
+
+        caracteristicas: caracteristicas,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -1617,6 +1692,10 @@ function cerrarFormularioCaja() {
     document.getElementById(
         "caja-stock"
     ).value = 0;
+
+    document.getElementById(
+    "caja-caracteristicas"
+).value = "";
 }
 
 
@@ -1664,7 +1743,10 @@ function dibujarCajas() {
                     " " +
                     producto.modelo +
                     " " +
-                    producto.unidades
+                    producto.unidades +
+                    " " +
+                    (producto.caracteristicas || "")
+
 
                 ).toLowerCase();
 
@@ -1690,7 +1772,7 @@ function dibujarCajas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="6"
+                <td colspan="7"
                     style="text-align:center;padding:30px;">
                     No hay cajas para mostrar.
                 </td>
@@ -1728,6 +1810,10 @@ function dibujarCajas() {
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
                         </td>
+
+                        <td>
+    ${escaparHTML(producto.caracteristicas || "")}
+</td>
 
                         <td>
 
@@ -1898,6 +1984,13 @@ function abrirFormularioCapsula(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById(
+    "capsula-caracteristicas"
+).value =
+    producto
+        ? (producto.caracteristicas || "")
+        : "";
+
 
     document
         .getElementById("formulario-capsulas")
@@ -1939,6 +2032,11 @@ function guardarCapsula() {
             ).value
         );
 
+        const caracteristicas =
+    document.getElementById(
+        "capsula-caracteristicas"
+    ).value.trim();
+
 
     if (!marca || !tipo || !modelo) {
 
@@ -1976,6 +2074,10 @@ function guardarCapsula() {
         producto.marca = marca;
         producto.tipo = tipo;
         producto.modelo = modelo;
+        producto.caracteristicas = caracteristicas;
+        if (!actualizarStockInicialDesdeProducto("capsulas", producto, stock)) {
+    return;
+}
 
 
         cerrarFormularioCapsula();
@@ -1999,6 +2101,8 @@ function guardarCapsula() {
         modelo: modelo,
 
         stock: stock,
+
+        caracteristicas: caracteristicas,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -2057,6 +2161,10 @@ function cerrarFormularioCapsula() {
     document.getElementById(
         "capsula-stock"
     ).value = 0;
+
+    document.getElementById(
+    "capsula-caracteristicas"
+).value = "";
 }
 
 
@@ -2102,7 +2210,9 @@ function dibujarCapsulas() {
                     " " +
                     producto.tipo +
                     " " +
-                    producto.modelo
+                    producto.modelo +
+                    " " +
+                    (producto.caracteristicas || "")
 
                 ).toLowerCase();
 
@@ -2128,7 +2238,7 @@ function dibujarCapsulas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="5"
+                <td colspan="6"
                     style="text-align:center;padding:30px;">
                     No hay cápsulas para mostrar.
                 </td>
@@ -2161,6 +2271,10 @@ function dibujarCapsulas() {
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
                         </td>
+
+                        <td>
+    ${escaparHTML(producto.caracteristicas || "")}
+</td>
 
                         <td>
 
@@ -2355,6 +2469,13 @@ function abrirFormularioEtiqueta(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById(
+    "etiqueta-caracteristicas"
+).value =
+    producto
+        ? (producto.caracteristicas || "")
+        : "";
+
 
     document
         .getElementById("formulario-etiquetas")
@@ -2408,21 +2529,30 @@ function guardarEtiqueta() {
             ).value
         );
 
+        const caracteristicas =
+    document.getElementById(
+        "etiqueta-caracteristicas"
+    ).value.trim();
 
-    if (
-        !marca ||
-        !tipo ||
-        !modelo ||
-        !anada ||
-        !lote
-    ) {
 
-        alert(
-            "Completa marca, tipo, modelo, añada y lote."
-        );
+   const esTrasera =
+    tipo.toLowerCase() === "trasera";
 
-        return;
-    }
+if (
+    !marca ||
+    !tipo ||
+    !modelo ||
+    (esTrasera && (!anada || !lote))
+) {
+
+    alert(
+        esTrasera
+            ? "Completa marca, tipo, modelo, añada y lote."
+            : "Completa marca, tipo y modelo."
+    );
+
+    return;
+}
 
 
     if (stock < 0 || !Number.isFinite(stock)) {
@@ -2433,6 +2563,12 @@ function guardarEtiqueta() {
 
         return;
     }
+
+    const anadaGuardar =
+    esTrasera ? anada : "";
+
+const loteGuardar =
+    esTrasera ? lote : "";
 
 
     if (productoEditando) {
@@ -2451,8 +2587,12 @@ function guardarEtiqueta() {
         producto.marca = marca;
         producto.tipo = tipo;
         producto.modelo = modelo;
-        producto.anada = anada;
-        producto.lote = lote;
+        producto.anada = anadaGuardar;
+producto.lote = loteGuardar;
+producto.caracteristicas = caracteristicas;
+if (!actualizarStockInicialDesdeProducto("etiquetas", producto, stock)) {
+    return;
+}
 
 
         cerrarFormularioEtiqueta();
@@ -2475,11 +2615,12 @@ function guardarEtiqueta() {
 
         modelo: modelo,
 
-        anada: anada,
-
-        lote: lote,
+        anada: anadaGuardar,
+lote: loteGuardar,
 
         stock: stock,
+
+        caracteristicas: caracteristicas,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -2546,6 +2687,10 @@ function cerrarFormularioEtiqueta() {
     document.getElementById(
         "etiqueta-stock"
     ).value = 0;
+
+    document.getElementById(
+    "etiqueta-caracteristicas"
+).value = "";
 }
 
 
@@ -2601,7 +2746,9 @@ function dibujarEtiquetas() {
                     " " +
                     producto.anada +
                     " " +
-                    producto.lote
+                    producto.lote +
+                    " " +
+                    (producto.caracteristicas || "")
 
                 ).toLowerCase();
 
@@ -2631,7 +2778,7 @@ function dibujarEtiquetas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="7"
+                <td colspan="8"
                     style="text-align:center;padding:30px;">
                     No hay etiquetas para mostrar.
                 </td>
@@ -2672,6 +2819,10 @@ function dibujarEtiquetas() {
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
                         </td>
+
+                        <td>
+    ${escaparHTML(producto.caracteristicas || "")}
+</td>
 
                         <td>
 
@@ -3076,6 +3227,10 @@ function abrirMovimiento(
         "cantidad-movimiento"
     ).value = "";
 
+    document.getElementById(
+    "fecha-movimiento"
+).value = "";
+
 
     document.getElementById(
         "observacion-movimiento"
@@ -3179,6 +3334,19 @@ function guardarMovimiento() {
             "observacion-movimiento"
         ).value.trim();
 
+        const fecha =
+    document.getElementById(
+        "fecha-movimiento"
+    ).value;
+
+
+if (!fecha) {
+
+    alert("Selecciona la fecha del movimiento.");
+
+    return;
+}
+
 
     if (
         !Number.isFinite(cantidad) ||
@@ -3234,7 +3402,8 @@ function guardarMovimiento() {
         cantidad,
         observacion,
         stockAnterior,
-        stockNuevo
+        stockNuevo,
+        fecha
     );
 
 
@@ -3257,7 +3426,8 @@ function registrarMovimiento(
     cantidad,
     observacion = "",
     stockAnterior = null,
-    stockPosterior = null
+    stockPosterior = null,
+    fechaManual = null
 ) {
 
     if (
@@ -3287,8 +3457,33 @@ function registrarMovimiento(
     }
 
 
-    const fechaHora =
-        obtenerFechaHora();
+    let fechaHora;
+
+if (fechaManual) {
+
+    const partes = fechaManual.split("-");
+
+    const anio = Number(partes[0]);
+    const mes = Number(partes[1]);
+    const dia = Number(partes[2]);
+
+    fechaHora = {
+
+        fecha:
+            `${dia}/${mes}/${anio}`,
+
+        hora: "",
+
+        timestamp:
+            new Date(anio, mes - 1, dia).getTime()
+
+    };
+
+} else {
+
+    fechaHora = obtenerFechaHora();
+
+}
 
 
     const movimiento = {
@@ -3323,7 +3518,7 @@ function registrarMovimiento(
             fechaHora.fecha,
 
         hora:
-            fechaHora.hora,
+            "",
 
         timestamp:
             fechaHora.timestamp
@@ -3343,6 +3538,102 @@ function registrarMovimiento(
     datos.historial[categoria].push(
         movimiento
     );
+}
+
+/* =========================================================
+   ACTUALIZAR STOCK INICIAL DESDE LA FICHA DEL PRODUCTO
+========================================================= */
+
+function actualizarStockInicialDesdeProducto(
+    categoria,
+    producto,
+    nuevoStock
+) {
+
+    const historial = datos.historial[categoria] || [];
+
+    // Obtener todos los movimientos de este producto
+    const movimientos = historial.filter(
+        m => m.productoId === producto.id
+    );
+
+    if (!movimientos.length) {
+
+        alert(
+            "No existe un movimiento inicial en el historial " +
+            "para este producto."
+        );
+
+        return false;
+    }
+
+    // El primer movimiento registrado corresponde al stock inicial
+    const movimientoInicial = movimientos[0];
+
+    let stockCalculado = Number(nuevoStock);
+
+    // Comprobar que los movimientos posteriores siguen siendo válidos
+    for (let i = 1; i < movimientos.length; i++) {
+
+        const movimiento = movimientos[i];
+
+        const cantidad = Number(movimiento.cantidad) || 0;
+
+        if (movimiento.tipo === "entrada") {
+
+            stockCalculado += cantidad;
+
+        } else {
+
+            if (cantidad > stockCalculado) {
+
+                alert(
+                    "No se puede reducir tanto el stock inicial. " +
+                    "Los consumos posteriores superarían las " +
+                    "unidades disponibles."
+                );
+
+                return false;
+            }
+
+            stockCalculado -= cantidad;
+        }
+    }
+
+    // Modificar la entrada inicial existente
+    movimientoInicial.tipo = "entrada";
+    movimientoInicial.cantidad = Number(nuevoStock);
+    movimientoInicial.stockAnterior = 0;
+    movimientoInicial.stockPosterior = Number(nuevoStock);
+
+    // Recalcular los movimientos posteriores
+    let stock = Number(nuevoStock);
+
+    for (let i = 1; i < movimientos.length; i++) {
+
+        const movimiento = movimientos[i];
+
+        const cantidad = Number(movimiento.cantidad) || 0;
+
+        movimiento.stockAnterior = stock;
+
+        if (movimiento.tipo === "entrada") {
+
+            stock += cantidad;
+
+        } else {
+
+            stock -= cantidad;
+
+        }
+
+        movimiento.stockPosterior = stock;
+    }
+
+    // Actualizar el stock definitivo del producto
+    producto.stock = stock;
+
+    return true;
 }
 
 
@@ -3434,8 +3725,6 @@ function dibujarHistorial(categoria) {
                         <div class="movimiento-fecha">
 
                             ${escaparHTML(movimiento.fecha)}
-                            <br>
-                            ${escaparHTML(movimiento.hora)}
 
                         </div>
 
@@ -3467,17 +3756,686 @@ function dibujarHistorial(categoria) {
                         <div class="movimiento-observacion">
 
                             ${escaparHTML(
-                                movimiento.observacion ||
-                                ""
+                                movimiento.observacion || ""
                             )}
 
                         </div>
+
+                        <button
+                            type="button"
+                            class="boton-tabla boton-editar"
+                            data-editar-movimiento="${escaparHTML(movimiento.id)}">
+
+                            ✏️ Editar
+
+                        </button>
 
                     </div>
                 `;
 
             }
         ).join("");
+
+
+    // Conectar los botones de edición
+
+    contenedor
+        .querySelectorAll("[data-editar-movimiento]")
+        .forEach(function (boton) {
+
+            boton.addEventListener(
+                "click",
+                function () {
+
+                    abrirEdicionMovimiento(
+                        categoria,
+                        boton.dataset.editarMovimiento
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+/* =========================================================
+   EDITAR MOVIMIENTO DEL HISTORIAL
+========================================================= */
+
+function crearModalEdicionMovimiento() {
+
+    let modal =
+        document.getElementById(
+            "modal-edicion-movimiento"
+        );
+
+
+    if (modal) {
+        return modal;
+    }
+
+
+    modal = document.createElement("div");
+
+    modal.id = "modal-edicion-movimiento";
+
+
+    modal.style.cssText = `
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        box-sizing: border-box;
+    `;
+
+
+    modal.innerHTML = `
+
+        <div style="
+            background: white;
+            width: 100%;
+            max-width: 430px;
+            padding: 22px;
+            border-radius: 14px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        ">
+
+            <h2 style="
+                margin-top: 0;
+                margin-bottom: 18px;
+                color: #315744;
+            ">
+                Editar movimiento
+            </h2>
+
+
+            <form id="form-edicion-movimiento">
+
+                <div style="margin-bottom: 15px;">
+
+                    <label style="display:block;margin-bottom:6px;">
+                        Fecha
+                    </label>
+
+                    <input
+                        type="date"
+                        id="edicion-fecha"
+                        required
+                        style="
+                            width:100%;
+                            padding:12px;
+                            box-sizing:border-box;
+                            border:1px solid #ccc;
+                            border-radius:8px;
+                            font-size:16px;
+                        "
+                    >
+
+                </div>
+
+
+                <div style="margin-bottom: 15px;">
+
+                    <label style="display:block;margin-bottom:6px;">
+                        Cantidad
+                    </label>
+
+                    <input
+                        type="number"
+                        id="edicion-cantidad"
+                        min="1"
+                        step="1"
+                        required
+                        style="
+                            width:100%;
+                            padding:12px;
+                            box-sizing:border-box;
+                            border:1px solid #ccc;
+                            border-radius:8px;
+                            font-size:16px;
+                        "
+                    >
+
+                </div>
+
+
+                <div style="margin-bottom: 20px;">
+
+                    <label style="display:block;margin-bottom:6px;">
+                        Observaciones
+                    </label>
+
+                    <textarea
+                        id="edicion-observacion"
+                        rows="3"
+                        style="
+                            width:100%;
+                            padding:12px;
+                            box-sizing:border-box;
+                            border:1px solid #ccc;
+                            border-radius:8px;
+                            font-size:16px;
+                            resize:vertical;
+                        "
+                    ></textarea>
+
+                </div>
+
+
+                <div style="
+                    display:flex;
+                    gap:10px;
+                ">
+
+                    <button
+                        type="submit"
+                        style="
+                            flex:1;
+                            padding:13px;
+                            border:0;
+                            border-radius:8px;
+                            background:#315744;
+                            color:white;
+                            font-weight:bold;
+                            font-size:15px;
+                        "
+                    >
+                        Guardar
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="cancelar-edicion-movimiento"
+                        style="
+                            flex:1;
+                            padding:13px;
+                            border:0;
+                            border-radius:8px;
+                            background:#777;
+                            color:white;
+                            font-weight:bold;
+                            font-size:15px;
+                        "
+                    >
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(modal);
+
+
+    document
+        .getElementById("form-edicion-movimiento")
+        .addEventListener(
+            "submit",
+            guardarEdicionMovimiento
+        );
+
+
+    document
+        .getElementById("cancelar-edicion-movimiento")
+        .addEventListener(
+            "click",
+            cerrarEdicionMovimiento
+        );
+
+
+    modal.addEventListener(
+        "click",
+        function (evento) {
+
+            if (evento.target === modal) {
+                cerrarEdicionMovimiento();
+            }
+
+        }
+    );
+
+
+    return modal;
+}
+
+
+/* =========================================================
+   ABRIR EDICIÓN
+========================================================= */
+
+function abrirEdicionMovimiento(
+    categoria,
+    movimientoId
+) {
+
+    const historial =
+        datos.historial[categoria] || [];
+
+
+    const movimiento =
+        historial.find(
+            m => m.id === movimientoId
+        );
+
+
+    if (!movimiento) {
+
+        alert(
+            "No se ha encontrado el movimiento."
+        );
+
+        return;
+    }
+
+
+    const modal =
+        crearModalEdicionMovimiento();
+
+
+    // Convertir DD/MM/AAAA a AAAA-MM-DD
+
+    const partes =
+        movimiento.fecha.split("/");
+
+
+    if (partes.length !== 3) {
+
+        alert(
+            "No se reconoce el formato de la fecha."
+        );
+
+        return;
+    }
+
+
+    const fechaInput =
+        `${partes[2]}-${partes[1].padStart(2, "0")}-${partes[0].padStart(2, "0")}`;
+
+
+    document.getElementById(
+        "edicion-fecha"
+    ).value = fechaInput;
+
+
+    document.getElementById(
+        "edicion-cantidad"
+    ).value = movimiento.cantidad;
+
+
+    document.getElementById(
+        "edicion-observacion"
+    ).value = movimiento.observacion || "";
+
+
+    // Guardamos qué movimiento estamos editando
+
+    modal.dataset.categoria = categoria;
+
+    modal.dataset.movimientoId = movimientoId;
+
+
+    modal.style.display = "flex";
+
+}
+
+
+/* =========================================================
+   CERRAR EDICIÓN
+========================================================= */
+
+function cerrarEdicionMovimiento() {
+
+    const modal =
+        document.getElementById(
+            "modal-edicion-movimiento"
+        );
+
+
+    if (modal) {
+
+        modal.style.display = "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   GUARDAR EDICIÓN
+========================================================= */
+
+function guardarEdicionMovimiento(evento) {
+
+    evento.preventDefault();
+
+
+    const modal =
+        document.getElementById(
+            "modal-edicion-movimiento"
+        );
+
+
+    const categoria =
+        modal.dataset.categoria;
+
+
+    const movimientoId =
+        modal.dataset.movimientoId;
+
+
+    const historial =
+        datos.historial[categoria];
+
+
+    const indice =
+        historial.findIndex(
+            m => m.id === movimientoId
+        );
+
+
+    if (indice === -1) {
+
+        alert(
+            "No se ha encontrado el movimiento."
+        );
+
+        return;
+    }
+
+
+    const movimiento =
+        historial[indice];
+
+
+    const fecha =
+        document.getElementById(
+            "edicion-fecha"
+        ).value;
+
+
+    const cantidadNueva =
+        Number(
+            document.getElementById(
+                "edicion-cantidad"
+            ).value
+        );
+
+
+    const observacionNueva =
+        document.getElementById(
+            "edicion-observacion"
+        ).value.trim();
+
+
+    if (!fecha) {
+
+        alert("Selecciona una fecha.");
+
+        return;
+    }
+
+
+    if (
+        !Number.isInteger(cantidadNueva) ||
+        cantidadNueva <= 0
+    ) {
+
+        alert(
+            "Introduce una cantidad válida."
+        );
+
+        return;
+    }
+
+
+    // Buscar el producto correspondiente
+
+    const producto =
+        datos[categoria].find(
+            p => p.id === movimiento.productoId
+        );
+
+
+    if (!producto) {
+
+        alert(
+            "No se ha encontrado el producto asociado."
+        );
+
+        return;
+    }
+
+
+    const cantidadAnterior =
+        Number(movimiento.cantidad);
+
+
+    // Calcular cuánto cambia el stock
+
+    const diferencia =
+        cantidadNueva - cantidadAnterior;
+
+
+    const ajusteStock =
+        movimiento.tipo === "entrada"
+            ? diferencia
+            : -diferencia;
+
+
+    /*
+     * Comprobar el stock resultante del movimiento
+     * que estamos corrigiendo.
+     */
+
+    const stockAnterior =
+        Number(movimiento.stockAnterior);
+
+
+    const stockNuevoMovimiento =
+        stockAnterior +
+        (
+            movimiento.tipo === "entrada"
+                ? cantidadNueva
+                : -cantidadNueva
+        );
+
+
+    if (
+        !Number.isFinite(stockNuevoMovimiento) ||
+        stockNuevoMovimiento < 0
+    ) {
+
+        alert(
+            "No se puede realizar la corrección porque el stock quedaría negativo."
+        );
+
+        return;
+    }
+
+
+    /*
+     * Los movimientos se guardan con push().
+     * Por tanto, los que tienen un índice posterior
+     * se registraron después de este movimiento.
+     *
+     * Comprobamos que ninguno quede con stock negativo.
+     */
+
+    for (
+        let i = indice + 1;
+        i < historial.length;
+        i++
+    ) {
+
+        const posterior = historial[i];
+
+
+        if (
+            posterior.productoId !== movimiento.productoId
+        ) {
+
+            continue;
+        }
+
+
+        const nuevoAnterior =
+            Number(posterior.stockAnterior) + ajusteStock;
+
+
+        const nuevoPosterior =
+            Number(posterior.stockPosterior) + ajusteStock;
+
+
+        if (
+            nuevoAnterior < 0 ||
+            nuevoPosterior < 0
+        ) {
+
+            alert(
+                "No se puede guardar esta corrección porque dejaría el stock negativo en un movimiento posterior."
+            );
+
+            return;
+        }
+
+    }
+
+
+    // Comprobar también el stock actual del producto
+
+    const stockActual =
+        Number(producto.stock) || 0;
+
+
+    if (
+        stockActual + ajusteStock < 0
+    ) {
+
+        alert(
+            "No se puede guardar esta corrección porque el stock actual quedaría negativo."
+        );
+
+        return;
+    }
+
+
+    /*
+     * A PARTIR DE AQUÍ SE GUARDAN LOS CAMBIOS.
+     */
+
+
+    // Corregir el movimiento original
+
+    movimiento.cantidad =
+        cantidadNueva;
+
+
+    movimiento.observacion =
+        observacionNueva;
+
+
+    // Actualizar fecha y timestamp
+
+    const partesFecha =
+        fecha.split("-");
+
+
+    const anio =
+        Number(partesFecha[0]);
+
+
+    const mes =
+        Number(partesFecha[1]);
+
+
+    const dia =
+        Number(partesFecha[2]);
+
+
+    movimiento.fecha =
+        `${dia}/${mes}/${anio}`;
+
+
+    movimiento.timestamp =
+        new Date(
+            anio,
+            mes - 1,
+            dia
+        ).getTime();
+
+
+    movimiento.hora = "";
+
+
+    // Actualizar el stock resultante del movimiento editado
+
+    movimiento.stockPosterior =
+        stockNuevoMovimiento;
+
+
+    /*
+     * Ajustar los stocks de todos los movimientos
+     * posteriores del mismo producto.
+     */
+
+    for (
+        let i = indice + 1;
+        i < historial.length;
+        i++
+    ) {
+
+        const posterior = historial[i];
+
+
+        if (
+            posterior.productoId !== movimiento.productoId
+        ) {
+
+            continue;
+        }
+
+
+        posterior.stockAnterior =
+            Number(posterior.stockAnterior) + ajusteStock;
+
+
+        posterior.stockPosterior =
+            Number(posterior.stockPosterior) + ajusteStock;
+
+    }
+
+
+    // Actualizar el stock actual del producto
+
+    producto.stock =
+        stockActual + ajusteStock;
+
+
+    // Guardar y actualizar la aplicación
+
+    guardarDatos();
+
+    cerrarEdicionMovimiento();
+
+    dibujarTodo();
+
+
+    alert(
+        "El movimiento se ha corregido correctamente."
+    );
+
 }
 
 
@@ -4022,55 +4980,161 @@ function prepararPDF() {
 }
 
 
+
 /* =========================================================
-   IMPRIMIR CATEGORÍA
+   IMPRIMIR CATEGORÍA - TABLA COMPLETA
 ========================================================= */
 
 function imprimirCategoria(categoria) {
 
-    const productos =
-        datos[categoria] || [];
-
+    const productos = datos[categoria] || [];
 
     if (!productos.length) {
 
-        alert(
-            "No hay productos para exportar."
-        );
+        alert("No hay productos para exportar.");
 
         return;
     }
 
-
     const nombreCategoria =
-        obtenerNombreCategoria(
-            categoria
-        );
+        obtenerNombreCategoria(categoria);
 
 
-    let htmlProductos = "";
+    // Definir las columnas según la categoría
+
+    let columnas = [];
+
+    switch (categoria) {
+
+        case "botellas":
+
+            columnas = [
+                { titulo: "Marca", campo: "marca" },
+                { titulo: "Modelo", campo: "modelo" },
+                { titulo: "Capacidad", campo: "capacidad", sufijo: " L" },
+                { titulo: "Características", campo: "caracteristicas" },
+                { titulo: "Stock", campo: "stock", stock: true }
+            ];
+
+            break;
 
 
-    productos.forEach(
-        function (producto, indice) {
+        case "corchos":
 
-            htmlProductos +=
-                generarPaginaPDF(
-                    categoria,
-                    producto,
-                    indice
-                );
+            columnas = [
+                { titulo: "Marca", campo: "marca" },
+                { titulo: "Modelo", campo: "modelo" },
+                { titulo: "Tipo", campo: "tipo" },
+                { titulo: "Características", campo: "caracteristicas" },
+                { titulo: "Stock", campo: "stock", stock: true }
+            ];
 
-        }
+            break;
+
+
+        case "cajas":
+
+            columnas = [
+                { titulo: "Marca", campo: "marca" },
+                { titulo: "Tipo", campo: "tipo" },
+                { titulo: "Modelo", campo: "modelo" },
+                { titulo: "Unidades", campo: "unidades" },
+                { titulo: "Características", campo: "caracteristicas" },
+                { titulo: "Stock", campo: "stock", stock: true }
+            ];
+
+            break;
+
+
+        case "capsulas":
+
+            columnas = [
+                { titulo: "Marca", campo: "marca" },
+                { titulo: "Tipo", campo: "tipo" },
+                { titulo: "Modelo", campo: "modelo" },
+                { titulo: "Características", campo: "caracteristicas" },
+                { titulo: "Stock", campo: "stock", stock: true }
+            ];
+
+            break;
+
+
+        case "etiquetas":
+
+            columnas = [
+                { titulo: "Marca", campo: "marca" },
+                { titulo: "Tipo", campo: "tipo" },
+                { titulo: "Modelo", campo: "modelo" },
+                { titulo: "Características", campo: "caracteristicas" },
+                { titulo: "Añada", campo: "anada" },
+                { titulo: "Lote", campo: "lote" },
+                { titulo: "Stock", campo: "stock", stock: true }
+            ];
+
+            break;
+    }
+
+
+    // Crear encabezados
+
+    const encabezados = columnas.map(columna => {
+
+        return `<th>${columna.titulo}</th>`;
+
+    }).join("");
+
+
+    // Crear filas de productos
+
+    const filas = productos.map(producto => {
+
+        const celdas = columnas.map(columna => {
+
+            let valor = producto[columna.campo];
+
+            if (
+                valor === undefined ||
+                valor === null ||
+                valor === ""
+            ) {
+
+                valor = "—";
+
+            } else if (columna.stock) {
+
+                valor = formatearNumero(valor);
+
+            } else if (columna.campo === "capacidad") {
+
+                valor = escaparHTML(valor) + columna.sufijo;
+
+            } else {
+
+                valor = escaparHTML(valor);
+
+            }
+
+            const clase = columna.stock
+                ? "stock"
+                : "";
+
+            return `<td class="${clase}">${valor}</td>`;
+
+        }).join("");
+
+
+        return `<tr>${celdas}</tr>`;
+
+    }).join("");
+
+
+    // Abrir ventana de impresión
+
+    const ventana = window.open(
+        "",
+        "_blank",
+        "width=1100,height=800"
     );
-
-
-    const ventana =
-        window.open(
-            "",
-            "_blank",
-            "width=1000,height=800"
-        );
 
 
     if (!ventana) {
@@ -4085,7 +5149,6 @@ function imprimirCategoria(categoria) {
 
 
     ventana.document.open();
-
 
     ventana.document.write(`
 
@@ -4104,8 +5167,8 @@ function imprimirCategoria(categoria) {
             <style>
 
                 @page {
-                    size: A4 portrait;
-                    margin: 15mm;
+                    size: A4 landscape;
+                    margin: 12mm;
                 }
 
                 * {
@@ -4113,152 +5176,86 @@ function imprimirCategoria(categoria) {
                 }
 
                 body {
-
                     margin: 0;
-
-                    font-family:
-                        Arial,
-                        Helvetica,
-                        sans-serif;
-
+                    font-family: Arial, Helvetica, sans-serif;
                     color: #26332b;
-
                     background: white;
-
-                }
-
-                .pagina {
-
-                    page-break-after: always;
-
-                    min-height: 267mm;
-
-                    display: flex;
-
-                    flex-direction: column;
-
-                }
-
-                .pagina:last-child {
-                    page-break-after: auto;
+                    font-size: 11px;
                 }
 
                 .cabecera {
-
                     background: #315744;
-
                     color: white;
-
-                    padding: 18px;
-
-                    border-radius: 8px;
-
-                    margin-bottom: 25px;
-
+                    padding: 16px 20px;
+                    border-radius: 6px;
+                    margin-bottom: 18px;
                 }
 
                 .cabecera h1 {
-
                     margin: 0 0 5px;
-
-                    font-size: 26px;
-
+                    font-size: 22px;
                 }
 
                 .cabecera p {
-
                     margin: 0;
-
-                    font-size: 14px;
-
+                    font-size: 13px;
                 }
 
-                .producto {
-
-                    border:
-                        2px solid #315744;
-
-                    border-radius: 10px;
-
-                    overflow: hidden;
-
-                }
-
-                .producto-titulo {
-
-                    background: #e8f0eb;
-
-                    padding: 18px;
-
-                    font-size: 22px;
-
-                    font-weight: bold;
-
-                    color: #315744;
-
+                .informacion {
+                    margin-bottom: 12px;
+                    font-size: 11px;
+                    color: #68736c;
                 }
 
                 table {
-
                     width: 100%;
-
                     border-collapse: collapse;
+                    table-layout: auto;
+                }
 
+                thead {
+                    display: table-header-group;
+                }
+
+                tr {
+                    page-break-inside: avoid;
+                    break-inside: avoid;
                 }
 
                 th {
-
-                    width: 35%;
-
+                    background: #315744;
+                    color: white;
+                    padding: 9px 7px;
                     text-align: left;
-
-                    background: #f1f4f2;
-
-                    padding: 13px;
-
-                    border-bottom:
-                        1px solid #d8ded9;
-
+                    border: 1px solid #315744;
+                    font-size: 10px;
                 }
 
                 td {
-
-                    padding: 13px;
-
-                    border-bottom:
-                        1px solid #d8ded9;
-
+                    padding: 8px 7px;
+                    border: 1px solid #d8ded9;
+                    vertical-align: middle;
+                    overflow-wrap: anywhere;
                 }
 
-                tr:last-child th,
-                tr:last-child td {
-
-                    border-bottom: 0;
-
+                tbody tr:nth-child(even) {
+                    background: #f1f4f2;
                 }
 
                 .stock {
-
-                    font-size: 28px;
-
+                    text-align: center;
                     font-weight: bold;
-
                     color: #315744;
-
+                    white-space: nowrap;
                 }
 
                 .pie {
-
-                    margin-top: auto;
-
-                    padding-top: 20px;
-
+                    margin-top: 15px;
+                    padding-top: 8px;
+                    border-top: 1px solid #d8ded9;
                     text-align: center;
-
                     color: #68736c;
-
-                    font-size: 11px;
-
+                    font-size: 10px;
                 }
 
             </style>
@@ -4267,7 +5264,43 @@ function imprimirCategoria(categoria) {
 
         <body>
 
-            ${htmlProductos}
+            <div class="cabecera">
+
+                <h1>Materiales Auxiliares</h1>
+
+                <p>${escaparHTML(nombreCategoria)}</p>
+
+            </div>
+
+            <div class="informacion">
+
+                Total de productos: ${productos.length}
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        ${encabezados}
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${filas}
+
+                </tbody>
+
+            </table>
+
+            <div class="pie">
+
+                Materiales Auxiliares · Bodega
+
+            </div>
 
         </body>
 
@@ -4278,284 +5311,17 @@ function imprimirCategoria(categoria) {
 
     ventana.document.close();
 
-
     ventana.focus();
 
 
-    setTimeout(
-        function () {
+    setTimeout(function () {
 
-            ventana.print();
+        ventana.print();
 
-        },
-        500
-    );
+    }, 500);
+
 }
 
-
-/* =========================================================
-   GENERAR PÁGINA PDF
-========================================================= */
-
-function generarPaginaPDF(
-    categoria,
-    producto,
-    indice
-) {
-
-    const nombreCategoria =
-        obtenerNombreCategoria(
-            categoria
-        );
-
-
-    const nombreProducto =
-        obtenerNombreProducto(
-            categoria,
-            producto
-        );
-
-
-    let filas = "";
-
-
-    switch (categoria) {
-
-        case "botellas":
-
-            filas = `
-
-                <tr>
-                    <th>Marca</th>
-                    <td>
-                        ${escaparHTML(producto.marca)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Modelo</th>
-                    <td>
-                        ${escaparHTML(producto.modelo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Capacidad</th>
-                    <td>
-                        ${escaparHTML(producto.capacidad)} L
-                    </td>
-                </tr>
-
-            `;
-
-            break;
-
-
-        case "corchos":
-
-            filas = `
-
-                <tr>
-                    <th>Marca</th>
-                    <td>
-                        ${escaparHTML(producto.marca)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Modelo</th>
-                    <td>
-                        ${escaparHTML(producto.modelo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Tipo</th>
-                    <td>
-                        ${escaparHTML(producto.tipo)}
-                    </td>
-                </tr>
-
-            `;
-
-            break;
-
-
-        case "cajas":
-
-            filas = `
-
-                <tr>
-                    <th>Marca</th>
-                    <td>
-                        ${escaparHTML(producto.marca)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Tipo</th>
-                    <td>
-                        ${escaparHTML(producto.tipo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Modelo</th>
-                    <td>
-                        ${escaparHTML(producto.modelo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Unidades</th>
-                    <td>
-                        ${escaparHTML(producto.unidades)}
-                        botellas
-                    </td>
-                </tr>
-
-            `;
-
-            break;
-
-
-        case "capsulas":
-
-            filas = `
-
-                <tr>
-                    <th>Marca</th>
-                    <td>
-                        ${escaparHTML(producto.marca)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Tipo</th>
-                    <td>
-                        ${escaparHTML(producto.tipo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Modelo</th>
-                    <td>
-                        ${escaparHTML(producto.modelo)}
-                    </td>
-                </tr>
-
-            `;
-
-            break;
-
-
-        case "etiquetas":
-
-            filas = `
-
-                <tr>
-                    <th>Marca</th>
-                    <td>
-                        ${escaparHTML(producto.marca)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Tipo</th>
-                    <td>
-                        ${escaparHTML(producto.tipo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Modelo</th>
-                    <td>
-                        ${escaparHTML(producto.modelo)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Añada</th>
-                    <td>
-                        ${escaparHTML(producto.anada)}
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>Lote</th>
-                    <td>
-                        ${escaparHTML(producto.lote)}
-                    </td>
-                </tr>
-
-            `;
-
-            break;
-
-    }
-
-
-    return `
-
-        <section class="pagina">
-
-            <div class="cabecera">
-
-                <h1>
-                    Materiales Auxiliares
-                </h1>
-
-                <p>
-                    ${escaparHTML(nombreCategoria)}
-                </p>
-
-            </div>
-
-
-            <div class="producto">
-
-                <div class="producto-titulo">
-
-                    ${escaparHTML(nombreProducto)}
-
-                </div>
-
-
-                <table>
-
-                    ${filas}
-
-                    <tr>
-
-                        <th>
-                            STOCK ACTUAL
-                        </th>
-
-                        <td class="stock">
-
-                            ${formatearNumero(
-                                producto.stock
-                            )}
-
-                        </td>
-
-                    </tr>
-
-                </table>
-
-            </div>
-
-
-            <div class="pie">
-
-                Materiales Auxiliares · Bodega
-
-            </div>
-
-        </section>
-
-    `;
-}
 
 
 /* =========================================================
