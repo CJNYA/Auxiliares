@@ -3557,15 +3557,35 @@ function actualizarStockInicialDesdeProducto(
         m => m.productoId === producto.id
     );
 
-    if (!movimientos.length) {
+   if (!movimientos.length) {
 
-        alert(
-            "No existe un movimiento inicial en el historial " +
-            "para este producto."
+    const stockAnterior =
+        Number(producto.stock) || 0;
+
+    const stockNuevo =
+        Number(nuevoStock) || 0;
+
+    // Permitir editar productos sin historial
+    producto.stock = stockNuevo;
+
+    // Si se introduce stock por primera vez,
+    // crear su entrada inicial en el historial
+    if (stockNuevo > 0) {
+
+        registrarMovimiento(
+            categoria,
+            producto,
+            "entrada",
+            stockNuevo,
+            "Stock inicial añadido desde la ficha del producto",
+            0,
+            stockNuevo
         );
 
-        return false;
     }
+
+    return true;
+}
 
     // El primer movimiento registrado corresponde al stock inicial
     const movimientoInicial = movimientos[0];
