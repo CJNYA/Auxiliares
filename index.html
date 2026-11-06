@@ -291,21 +291,27 @@
 
                 <div class="campo-filtro">
 
-                    <label for="filtro-capacidad-botellas">
-                        Capacidad
-                    </label>
+    <label for="filtro-modelo-botellas">
+        Modelo
+    </label>
 
-                    <select id="filtro-capacidad-botellas">
+    <select id="filtro-modelo-botellas">
 
-                        <option value="">Todas</option>
+        <option value="">Todos</option>
 
-                        <option value="0.5">0.5 L</option>
-                        <option value="0.75">0.75 L</option>
-                        <option value="1.5">1.5 L</option>
+        <option>Premiere</option>
+        <option>Vino Santo</option>
+        <option>Dogma Asia</option>
+        <option>Ancienne 2</option>
+        <option>BD Clara</option>
+        <option>BD Reserva</option>
+        <option>Cónica Pesante</option>
+        <option>BD MG Plus</option>
+        <option>BG Frizzante BVS</option>
 
-                    </select>
+    </select>
 
-                </div>
+</div>
 
             </div>
 
@@ -400,6 +406,11 @@
                     </div>
 
                     <div class="campo">
+    <label for="botella-lote">Lote</label>
+    <input type="text" id="botella-lote" placeholder="Introduce el lote">
+</div>
+
+                    <div class="campo">
     <label for="botella-caracteristicas">
         Características
     </label>
@@ -444,11 +455,13 @@
 
                             <tr>
 
-                                <th>Marca</th>
+                                <th>Marca (Fabricante)</th>
                                 <th>Modelo</th>
                                 <th>Capacidad</th>
                                 <th>Stock</th>
+                                <th>Lote</th>
                                 <th>Características</th>
+                                <th>Litros</th>
                                 <th>Acciones</th>
 
                             </tr>
@@ -584,25 +597,27 @@
                 </div>
 
 
-                <div class="campo-filtro">
+               <div class="campo-filtro">
 
-                    <label for="filtro-tipo-corchos">
-                        Tipo
-                    </label>
+    <label for="filtro-modelo-corchos">
+        Modelo
+    </label>
 
-                    <select id="filtro-tipo-corchos">
+    <select id="filtro-modelo-corchos">
 
-                        <option value="">Todos</option>
+        <option value="">Todos</option>
 
-                        <option>1+1</option>
-                        <option>2+2</option>
-                        <option>Natural</option>
-                        <option>Silicona</option>
-                        <option>Colmatado</option>
+        <option>24 Mozas</option>
+        <option>Madremia</option>
+        <option>Abracadabra</option>
+        <option>Platón</option>
+        <option>El Principito</option>
+        <option>Toro</option>
+        <option>Otros</option>
 
-                    </select>
+    </select>
 
-                </div>
+</div>
 
             </div>
 
@@ -683,6 +698,11 @@
                     </div>
 
                     <div class="campo">
+    <label for="corcho-lote">Lote</label>
+    <input type="text" id="corcho-lote" placeholder="Introduce el lote">
+</div>
+
+                    <div class="campo">
     <label for="corcho-caracteristicas">
         Características
     </label>
@@ -739,10 +759,11 @@
 
                             <tr>
 
-                                <th>Marca</th>
+                                <th>Marca (Fabricante)</th>
                                 <th>Modelo</th>
                                 <th>Tipo</th>
                                 <th>Stock</th>
+                                <th>Lote</th>
                                 <th>Características</th>
                                 <th>Acciones</th>
 
@@ -851,25 +872,6 @@
 
                 </div>
 
-
-                <div class="campo-filtro">
-
-                    <label for="filtro-marca-cajas">
-                        Marca
-                    </label>
-
-                    <select id="filtro-marca-cajas">
-
-                        <option value="">Todas</option>
-
-                        <option>SAN CAYETANO</option>
-                        <option>SYS OENOLOGICA</option>
-
-                    </select>
-
-                </div>
-
-
                 <div class="campo-filtro">
 
                     <label for="filtro-tipo-cajas">
@@ -887,6 +889,34 @@
                     </select>
 
                 </div>
+
+                <div class="campo-filtro">
+
+    <label for="filtro-modelo-cajas">
+        Modelo
+    </label>
+
+    <select id="filtro-modelo-cajas">
+
+        <option value="">Todos</option>
+
+        <option>Platón</option>
+        <option>Abracadabra</option>
+        <option>Madremia</option>
+        <option>24 Mozas</option>
+        <option>Loquillo Tinto</option>
+        <option>Encomienda de la Vega</option>
+        <option>El Principito</option>
+        <option>Loquillo Verdejo</option>
+        <option>Vocablos</option>
+        <option>Mixto</option>
+        <option>Individual</option>
+        <option>MG Genérica</option>
+        <option>Otros</option>
+
+    </select>
+
+</div>
 
             </div>
 
@@ -1043,12 +1073,13 @@
 
                             <tr>
 
-                                <th>Marca</th>
+                                <th>Marca (Fabricante)</th>
                                 <th>Tipo</th>
                                 <th>Modelo</th>
                                 <th>Unidades</th>
                                 <th>Stock</th>
                                 <th>Características</th>
+                                <th>Botellas</th>
                                 <th>Acciones</th>
 
                             </tr>
@@ -1177,20 +1208,32 @@
 
                 <div class="campo-filtro">
 
-                    <label for="filtro-tipo-capsulas">
-                        Tipo
-                    </label>
+    <label for="filtro-modelo-capsulas">
+        Modelo
+    </label>
 
-                    <select id="filtro-tipo-capsulas">
+    <select id="filtro-modelo-capsulas">
 
-                        <option value="">Todos</option>
+        <option value="">Todos</option>
 
-                        <option>Complejo</option>
-                        <option>Estaño</option>
+        <option>Platón</option>
+        <option>Abracadabra</option>
+        <option>Madremia</option>
+        <option>24 Mozas</option>
+        <option>Loquillo Tinto</option>
+        <option>Encomienda de la Vega</option>
+        <option>El Principito</option>
+        <option>Loquillo Verdejo</option>
+        <option>Vocablos</option>
+        <option>MG Abracadabra</option>
+        <option>MG Madremia</option>
+        <option>MG 24 Mozas</option>
+        <option>Negro Génerico</option>
+        <option>Otros</option>
 
-                    </select>
+    </select>
 
-                </div>
+</div>
 
             </div>
 
@@ -1326,7 +1369,7 @@
 
                             <tr>
 
-                                <th>Marca</th>
+                                <th>Marca (Fabricante)</th>
                                 <th>Tipo</th>
                                 <th>Modelo</th>
                                 <th>Stock</th>
@@ -1443,20 +1486,27 @@
 
                 <div class="campo-filtro">
 
-                    <label for="filtro-marca-etiquetas">
-                        Marca
-                    </label>
+    <label for="filtro-modelo-etiquetas">
+        Modelo
+    </label>
 
-                    <select id="filtro-marca-etiquetas">
+    <select id="filtro-modelo-etiquetas">
 
-                        <option value="">Todas</option>
+        <option value="">Todos</option>
 
-                        <option>BACIGALUPE HNOS.</option>
-                        <option>AGRAF S.A.U.</option>
+        <option>Platón</option>
+        <option>Abracadabra</option>
+        <option>Madremia</option>
+        <option>24 Mozas</option>
+        <option>Loquillo Tinto</option>
+        <option>Encomienda de la Vega</option>
+        <option>El Principito</option>
+        <option>Loquillo Verdejo</option>
+        <option>Vocablos</option>
 
-                    </select>
+    </select>
 
-                </div>
+</div>
 
 
                 <div class="campo-filtro">
@@ -1651,7 +1701,7 @@
 
                             <tr>
 
-                                <th>Marca</th>
+                                <th>Marca (Fabricante)</th>
                                 <th>Tipo</th>
                                 <th>Modelo</th>
                                 <th>Añada</th>

@@ -464,12 +464,12 @@ function prepararBotellas() {
         );
 
 
-    document
-        .getElementById("filtro-capacidad-botellas")
-        .addEventListener(
-            "change",
-            dibujarBotellas
-        );
+   document
+    .getElementById("filtro-modelo-botellas")
+    .addEventListener(
+        "change",
+        dibujarBotellas
+    );
 
 
     document
@@ -546,6 +546,9 @@ function abrirFormularioBotella(producto = null) {
             ? producto.stock
             : 0;
 
+             document.getElementById("botella-lote").value =
+        producto ? (producto.lote || "") : "";
+
             document.getElementById(
     "botella-caracteristicas"
 ).value =
@@ -583,6 +586,9 @@ function guardarBotella() {
         document.getElementById(
             "botella-capacidad"
         ).value;
+
+          const lote =
+        document.getElementById("botella-lote").value.trim();
 
 
     const stock =
@@ -639,6 +645,7 @@ function guardarBotella() {
         producto.marca = marca;
         producto.modelo = modelo;
         producto.capacidad = capacidad;
+        producto.lote = lote;
         producto.caracteristicas = caracteristicas;
         if (!actualizarStockInicialDesdeProducto("botellas", producto, stock)) {
     return;
@@ -673,6 +680,8 @@ function guardarBotella() {
         capacidad: capacidad,
 
         stock: stock,
+
+         lote: lote,
 
         caracteristicas: caracteristicas,
 
@@ -736,10 +745,13 @@ function cerrarFormularioBotella() {
         "botella-stock"
     ).value = 0;
 
+    document.getElementById("botella-lote").value = "";
+
     document.getElementById(
     "botella-caracteristicas"
 ).value = "";
 }
+
 
 
 /* =========================================================
@@ -768,9 +780,9 @@ function dibujarBotellas() {
         ).value;
 
 
-    const capacidad =
+    const modelo =
         document.getElementById(
-            "filtro-capacidad-botellas"
+            "filtro-modelo-botellas"
         ).value;
 
 
@@ -785,9 +797,10 @@ function dibujarBotellas() {
                     producto.modelo +
                     " " +
                     producto.capacidad +
-
                     " " +
-                   (producto.caracteristicas || "")
+                    (producto.lote || "") +
+                    " " +
+                    (producto.caracteristicas || "")
 
                 ).toLowerCase();
 
@@ -802,16 +815,15 @@ function dibujarBotellas() {
                     producto.marca === marca;
 
 
-                const coincideCapacidad =
-                    !capacidad ||
-                    String(producto.capacidad) ===
-                    String(capacidad);
+                const coincideModelo =
+                    !modelo ||
+                    producto.modelo === modelo;
 
 
                 return (
                     coincideTexto &&
                     coincideMarca &&
-                    coincideCapacidad
+                    coincideModelo
                 );
 
             }
@@ -822,7 +834,7 @@ function dibujarBotellas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="6"
+                <td colspan="8"
                     style="text-align:center;padding:30px;">
                     No hay botellas para mostrar.
                 </td>
@@ -836,6 +848,19 @@ function dibujarBotellas() {
     tbody.innerHTML =
         productos.map(
             function (producto) {
+
+                const stock =
+                    Number(producto.stock) || 0;
+
+                const capacidad =
+                    Number(
+                        String(producto.capacidad || "")
+                            .replace(",", ".")
+                    ) || 0;
+
+                const litros =
+                    stock * capacidad;
+
 
                 return `
                     <tr>
@@ -853,12 +878,20 @@ function dibujarBotellas() {
                         </td>
 
                         <td class="stock">
-                            ${formatearNumero(producto.stock)}
+                            ${formatearNumero(stock)}
                         </td>
 
                         <td>
-    ${escaparHTML(producto.caracteristicas || "")}
-</td>
+                            ${escaparHTML(producto.lote || "")}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(producto.caracteristicas || "")}
+                        </td>
+
+                        <td class="stock">
+                            <strong>${formatearNumero(litros)} L</strong>
+                        </td>
 
                         <td>
 
@@ -902,6 +935,7 @@ function dibujarBotellas() {
             }
         ).join("");
 }
+
 
 
 /* =========================================================
@@ -955,11 +989,11 @@ function prepararCorchos() {
 
 
     document
-        .getElementById("filtro-tipo-corchos")
-        .addEventListener(
-            "change",
-            dibujarCorchos
-        );
+    .getElementById("filtro-modelo-corchos")
+    .addEventListener(
+        "change",
+        dibujarCorchos
+    );
 
 
     document
@@ -1033,6 +1067,9 @@ function abrirFormularioCorcho(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("corcho-lote").value =
+        producto ? (producto.lote || "") : "";
+
             document.getElementById(
     "corcho-caracteristicas"
 ).value =
@@ -1081,6 +1118,9 @@ function guardarCorcho() {
             ).value
         );
 
+        const lote =
+        document.getElementById("corcho-lote").value.trim();
+
         const caracteristicas =
     document.getElementById(
         "corcho-caracteristicas"
@@ -1123,6 +1163,7 @@ function guardarCorcho() {
         producto.marca = marca;
         producto.modelo = modelo;
         producto.tipo = tipo;
+        producto.lote = lote;
         producto.caracteristicas = caracteristicas;
         if (!actualizarStockInicialDesdeProducto("corchos", producto, stock)) {
     return;
@@ -1150,6 +1191,8 @@ function guardarCorcho() {
         tipo: tipo,
 
         stock: stock,
+
+        lote: lote,
 
         caracteristicas: caracteristicas,
 
@@ -1211,6 +1254,8 @@ function cerrarFormularioCorcho() {
         "corcho-stock"
     ).value = 0;
 
+    document.getElementById("corcho-lote").value = "";
+
     document.getElementById(
     "corcho-caracteristicas"
 ).value = "";
@@ -1243,10 +1288,10 @@ function dibujarCorchos() {
         ).value;
 
 
-    const tipo =
-        document.getElementById(
-            "filtro-tipo-corchos"
-        ).value;
+    const modelo =
+    document.getElementById(
+        "filtro-modelo-corchos"
+    ).value;
 
 
     const productos =
@@ -1260,6 +1305,8 @@ function dibujarCorchos() {
                     producto.modelo +
                     " " +
                     producto.tipo +
+                     " " +
+                   (producto.lote || "") +
                     " " +
                    (producto.caracteristicas || "")
 
@@ -1274,8 +1321,8 @@ function dibujarCorchos() {
                     (!marca ||
                         producto.marca === marca) &&
 
-                    (!tipo ||
-                        producto.tipo === tipo)
+                    (!modelo ||
+    producto.modelo === modelo)
 
                 );
 
@@ -1287,7 +1334,7 @@ function dibujarCorchos() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="6"
+                <td colspan="7"
                     style="text-align:center;padding:30px;">
                     No hay corchos para mostrar.
                 </td>
@@ -1319,6 +1366,10 @@ function dibujarCorchos() {
 
                         <td class="stock">
                             ${formatearNumero(producto.stock)}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(producto.lote || "")}
                         </td>
 
                         <td>
@@ -1406,21 +1457,19 @@ function prepararCajas() {
             dibujarCajas
         );
 
-
-    document
-        .getElementById("filtro-marca-cajas")
-        .addEventListener(
-            "change",
-            dibujarCajas
-        );
-
-
     document
         .getElementById("filtro-tipo-cajas")
         .addEventListener(
             "change",
             dibujarCajas
         );
+
+        document
+    .getElementById("filtro-modelo-cajas")
+    .addEventListener(
+        "change",
+        dibujarCajas
+    );
 
 
     document
@@ -1699,6 +1748,7 @@ function cerrarFormularioCaja() {
 }
 
 
+
 /* =========================================================
    DIBUJAR CAJAS
 ========================================================= */
@@ -1719,15 +1769,15 @@ function dibujarCajas() {
             .toLowerCase();
 
 
-    const marca =
-        document.getElementById(
-            "filtro-marca-cajas"
-        ).value;
-
-
     const tipo =
         document.getElementById(
             "filtro-tipo-cajas"
+        ).value;
+
+
+    const modelo =
+        document.getElementById(
+            "filtro-modelo-cajas"
         ).value;
 
 
@@ -1747,7 +1797,6 @@ function dibujarCajas() {
                     " " +
                     (producto.caracteristicas || "")
 
-
                 ).toLowerCase();
 
 
@@ -1756,11 +1805,11 @@ function dibujarCajas() {
                     (!texto ||
                         textoProducto.includes(texto)) &&
 
-                    (!marca ||
-                        producto.marca === marca) &&
-
                     (!tipo ||
-                        producto.tipo === tipo)
+                        producto.tipo === tipo) &&
+
+                    (!modelo ||
+                        producto.modelo === modelo)
 
                 );
 
@@ -1772,7 +1821,7 @@ function dibujarCajas() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="7"
+                <td colspan="8"
                     style="text-align:center;padding:30px;">
                     No hay cajas para mostrar.
                 </td>
@@ -1786,6 +1835,19 @@ function dibujarCajas() {
     tbody.innerHTML =
         productos.map(
             function (producto) {
+
+                const stock =
+                    Number(producto.stock) || 0;
+
+                const unidades =
+                    Number(
+                        String(producto.unidades || "")
+                            .replace(",", ".")
+                    ) || 0;
+
+                const botellas =
+                    stock * unidades;
+
 
                 return `
                     <tr>
@@ -1808,12 +1870,16 @@ function dibujarCajas() {
                         </td>
 
                         <td class="stock">
-                            ${formatearNumero(producto.stock)}
+                            ${formatearNumero(stock)}
                         </td>
 
                         <td>
-    ${escaparHTML(producto.caracteristicas || "")}
-</td>
+                            ${escaparHTML(producto.caracteristicas || "")}
+                        </td>
+
+                        <td class="stock">
+                            <strong>${formatearNumero(botellas)}</strong>
+                        </td>
 
                         <td>
 
@@ -1906,11 +1972,11 @@ function prepararCapsulas() {
 
 
     document
-        .getElementById("filtro-tipo-capsulas")
-        .addEventListener(
-            "change",
-            dibujarCapsulas
-        );
+    .getElementById("filtro-modelo-capsulas")
+    .addEventListener(
+        "change",
+        dibujarCapsulas
+    );
 
 
     document
@@ -2194,10 +2260,10 @@ function dibujarCapsulas() {
         ).value;
 
 
-    const tipo =
-        document.getElementById(
-            "filtro-tipo-capsulas"
-        ).value;
+   const modelo =
+    document.getElementById(
+        "filtro-modelo-capsulas"
+    ).value;
 
 
     const productos =
@@ -2225,8 +2291,8 @@ function dibujarCapsulas() {
                     (!marca ||
                         producto.marca === marca) &&
 
-                    (!tipo ||
-                        producto.tipo === tipo)
+                    (!modelo ||
+    producto.modelo === modelo)
 
                 );
 
@@ -2358,12 +2424,12 @@ function prepararEtiquetas() {
         );
 
 
-    document
-        .getElementById("filtro-marca-etiquetas")
-        .addEventListener(
-            "change",
-            dibujarEtiquetas
-        );
+   document
+    .getElementById("filtro-modelo-etiquetas")
+    .addEventListener(
+        "change",
+        dibujarEtiquetas
+    );
 
 
     document
@@ -2714,10 +2780,10 @@ function dibujarEtiquetas() {
             .toLowerCase();
 
 
-    const marca =
-        document.getElementById(
-            "filtro-marca-etiquetas"
-        ).value;
+    const modelo =
+    document.getElementById(
+        "filtro-modelo-etiquetas"
+    ).value;
 
 
     const tipo =
@@ -2758,8 +2824,8 @@ function dibujarEtiquetas() {
                     (!texto ||
                         textoProducto.includes(texto)) &&
 
-                    (!marca ||
-                        producto.marca === marca) &&
+                    (!modelo ||
+    producto.modelo === modelo) &&
 
                     (!tipo ||
                         producto.tipo === tipo) &&
@@ -3438,7 +3504,6 @@ function registrarMovimiento(
         const stockActual =
             Number(producto.stock) || 0;
 
-
         if (tipo === "entrada") {
 
             stockAnterior =
@@ -3451,40 +3516,37 @@ function registrarMovimiento(
 
         }
 
-
         stockPosterior =
             stockActual;
     }
 
-
     let fechaHora;
 
-if (fechaManual) {
+    if (fechaManual) {
 
-    const partes = fechaManual.split("-");
+        const partes = fechaManual.split("-");
 
-    const anio = Number(partes[0]);
-    const mes = Number(partes[1]);
-    const dia = Number(partes[2]);
+        const anio = Number(partes[0]);
+        const mes = Number(partes[1]);
+        const dia = Number(partes[2]);
 
-    fechaHora = {
+        fechaHora = {
 
-        fecha:
-            `${dia}/${mes}/${anio}`,
+            fecha:
+                `${dia}/${mes}/${anio}`,
 
-        hora: "",
+            hora: "",
 
-        timestamp:
-            new Date(anio, mes - 1, dia).getTime()
+            timestamp:
+                new Date(anio, mes - 1, dia).getTime()
 
-    };
+        };
 
-} else {
+    } else {
 
-    fechaHora = obtenerFechaHora();
+        fechaHora = obtenerFechaHora();
 
-}
-
+    }
 
     const movimiento = {
 
@@ -3498,6 +3560,12 @@ if (fechaManual) {
                 categoria,
                 producto
             ),
+
+        // Guardar el lote en el momento del movimiento
+        productoLote:
+            (categoria === "botellas" || categoria === "corchos")
+                ? (producto.lote || "")
+                : "",
 
         tipo:
             tipo,
@@ -3525,7 +3593,6 @@ if (fechaManual) {
 
     };
 
-
     if (
         !datos.historial[categoria]
     ) {
@@ -3534,12 +3601,10 @@ if (fechaManual) {
 
     }
 
-
     datos.historial[categoria].push(
         movimiento
     );
 }
-
 /* =========================================================
    ACTUALIZAR STOCK INICIAL DESDE LA FICHA DEL PRODUCTO
 ========================================================= */
@@ -3693,15 +3758,12 @@ function dibujarHistorial(categoria) {
             "historial-" + categoria
         );
 
-
     if (!contenedor) {
         return;
     }
 
-
     const historial =
         datos.historial[categoria] || [];
-
 
     if (!historial.length) {
 
@@ -3714,14 +3776,12 @@ function dibujarHistorial(categoria) {
         return;
     }
 
-
     const ordenado =
         [...historial]
             .sort(
                 (a, b) =>
                     b.timestamp - a.timestamp
             );
-
 
     contenedor.innerHTML =
         ordenado.map(
@@ -3732,12 +3792,25 @@ function dibujarHistorial(categoria) {
                         ? "movimiento-entrada"
                         : "movimiento-consumo";
 
-
                 const simbolo =
                     movimiento.tipo === "entrada"
                         ? "+"
                         : "-";
 
+                // Mostrar lote solamente en botellas y corchos
+                const mostrarLote =
+                    categoria === "botellas" ||
+                    categoria === "corchos";
+
+                const htmlLote =
+                    mostrarLote
+                        ? `
+                            <div class="movimiento-lote">
+                                <strong>Lote:</strong>
+                                ${escaparHTML(movimiento.productoLote || "")}
+                            </div>
+                        `
+                        : "";
 
                 return `
                     <div class="movimiento-historial">
@@ -3755,6 +3828,8 @@ function dibujarHistorial(categoria) {
                             )}
 
                         </div>
+
+                        ${htmlLote}
 
                         <div class="${clase}">
 
@@ -3795,7 +3870,6 @@ function dibujarHistorial(categoria) {
 
             }
         ).join("");
-
 
     // Conectar los botones de edición
 
@@ -5001,6 +5075,7 @@ function prepararPDF() {
 
 
 
+
 /* =========================================================
    IMPRIMIR CATEGORÍA - TABLA COMPLETA
 ========================================================= */
@@ -5032,8 +5107,10 @@ function imprimirCategoria(categoria) {
                 { titulo: "Marca", campo: "marca" },
                 { titulo: "Modelo", campo: "modelo" },
                 { titulo: "Capacidad", campo: "capacidad", sufijo: " L" },
+                { titulo: "Stock", campo: "stock", stock: true },
+                { titulo: "Lote", campo: "lote" },
                 { titulo: "Características", campo: "caracteristicas" },
-                { titulo: "Stock", campo: "stock", stock: true }
+                { titulo: "Litros", calculo: "litros", stock: true }
             ];
 
             break;
@@ -5045,8 +5122,9 @@ function imprimirCategoria(categoria) {
                 { titulo: "Marca", campo: "marca" },
                 { titulo: "Modelo", campo: "modelo" },
                 { titulo: "Tipo", campo: "tipo" },
-                { titulo: "Características", campo: "caracteristicas" },
-                { titulo: "Stock", campo: "stock", stock: true }
+                { titulo: "Stock", campo: "stock", stock: true },
+                { titulo: "Lote", campo: "lote" },
+                { titulo: "Características", campo: "caracteristicas" }
             ];
 
             break;
@@ -5059,8 +5137,9 @@ function imprimirCategoria(categoria) {
                 { titulo: "Tipo", campo: "tipo" },
                 { titulo: "Modelo", campo: "modelo" },
                 { titulo: "Unidades", campo: "unidades" },
+                { titulo: "Stock", campo: "stock", stock: true },
                 { titulo: "Características", campo: "caracteristicas" },
-                { titulo: "Stock", campo: "stock", stock: true }
+                { titulo: "Botellas", calculo: "botellas", stock: true }
             ];
 
             break;
@@ -5110,33 +5189,84 @@ function imprimirCategoria(categoria) {
 
         const celdas = columnas.map(columna => {
 
-            let valor = producto[columna.campo];
+            let valor;
 
-            if (
-                valor === undefined ||
-                valor === null ||
-                valor === ""
-            ) {
 
-                valor = "—";
+            // Calcular litros disponibles en botellas
 
-            } else if (columna.stock) {
+            if (columna.calculo === "litros") {
 
-                valor = formatearNumero(valor);
+                const stock =
+                    Number(producto.stock) || 0;
 
-            } else if (columna.campo === "capacidad") {
+                const capacidad =
+                    Number(
+                        String(producto.capacidad || "")
+                            .replace(",", ".")
+                    ) || 0;
 
-                valor = escaparHTML(valor) + columna.sufijo;
-
-            } else {
-
-                valor = escaparHTML(valor);
+                valor =
+                    formatearNumero(stock * capacidad) + " L";
 
             }
+
+
+            // Calcular botellas disponibles en cajas
+
+            else if (columna.calculo === "botellas") {
+
+                const stock =
+                    Number(producto.stock) || 0;
+
+                const unidades =
+                    Number(
+                        String(producto.unidades || "")
+                            .replace(",", ".")
+                    ) || 0;
+
+                valor =
+                    formatearNumero(stock * unidades);
+
+            }
+
+
+            // Campos normales
+
+            else {
+
+                valor = producto[columna.campo];
+
+                if (
+                    valor === undefined ||
+                    valor === null ||
+                    valor === ""
+                ) {
+
+                    valor = "—";
+
+                } else if (columna.stock) {
+
+                    valor = formatearNumero(valor);
+
+                } else if (columna.campo === "capacidad") {
+
+                    valor =
+                        escaparHTML(valor) +
+                        columna.sufijo;
+
+                } else {
+
+                    valor = escaparHTML(valor);
+
+                }
+
+            }
+
 
             const clase = columna.stock
                 ? "stock"
                 : "";
+
 
             return `<td class="${clase}">${valor}</td>`;
 
