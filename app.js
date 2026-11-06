@@ -5373,13 +5373,18 @@ function imprimirCategoria(categoria) {
                 }
 
                 th {
-                    background: #315744;
-                    color: white;
-                    padding: 9px 7px;
-                    text-align: left;
-                    border: 1px solid #315744;
-                    font-size: 10px;
-                }
+    background: #203f30;
+    color: #ffffff;
+    padding: 11px 8px;
+    text-align: center;
+    border: 1px solid #203f30;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
 
                 td {
                     padding: 8px 7px;
