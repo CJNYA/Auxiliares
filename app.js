@@ -546,6 +546,9 @@ function abrirFormularioBotella(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("botella-stock-minimo").value =
+    producto ? (producto.stockMinimo || 0) : 0;
+
              document.getElementById("botella-lote").value =
         producto ? (producto.lote || "") : "";
 
@@ -598,6 +601,9 @@ function guardarBotella() {
             ).value
         );
 
+        const stockMinimo =
+    Number(document.getElementById("botella-stock-minimo").value);
+
         const caracteristicas =
     document.getElementById(
         "botella-caracteristicas"
@@ -623,6 +629,11 @@ function guardarBotella() {
         return;
     }
 
+    if (stockMinimo < 0 || !Number.isFinite(stockMinimo)) {
+    alert("El stock mínimo no puede ser negativo.");
+    return;
+}
+
 
     if (productoEditando) {
 
@@ -647,6 +658,7 @@ function guardarBotella() {
         producto.capacidad = capacidad;
         producto.lote = lote;
         producto.caracteristicas = caracteristicas;
+        producto.stockMinimo = stockMinimo;
         if (!actualizarStockInicialDesdeProducto("botellas", producto, stock)) {
     return;
 }
@@ -684,6 +696,8 @@ function guardarBotella() {
          lote: lote,
 
         caracteristicas: caracteristicas,
+
+        stockMinimo: stockMinimo,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -852,6 +866,12 @@ function dibujarBotellas() {
                 const stock =
                     Number(producto.stock) || 0;
 
+                    const stockMinimo =
+    Number(producto.stockMinimo) || 0;
+
+const stockBajo =
+    stockMinimo > 0 && stock <= stockMinimo;
+
                 const capacidad =
                     Number(
                         String(producto.capacidad || "")
@@ -863,7 +883,7 @@ function dibujarBotellas() {
 
 
                 return `
-                    <tr>
+                    <tr class="${stockBajo ? 'stock-bajo' : ''}">
 
                         <td>
                             ${escaparHTML(producto.marca)}
@@ -877,9 +897,10 @@ function dibujarBotellas() {
                             ${escaparHTML(producto.capacidad)} L
                         </td>
 
-                        <td class="stock">
-                            ${formatearNumero(stock)}
-                        </td>
+                       <td class="stock">
+    ${stockBajo ? '⚠️ ' : ''}
+    ${formatearNumero(stock)}
+</td>
 
                         <td>
                             ${escaparHTML(producto.lote || "")}
@@ -1067,6 +1088,9 @@ function abrirFormularioCorcho(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("corcho-stock-minimo").value =
+    producto ? (producto.stockMinimo || 0) : 0;
+
             document.getElementById("corcho-lote").value =
         producto ? (producto.lote || "") : "";
 
@@ -1118,6 +1142,9 @@ function guardarCorcho() {
             ).value
         );
 
+        const stockMinimo =
+    Number(document.getElementById("corcho-stock-minimo").value);
+
         const lote =
         document.getElementById("corcho-lote").value.trim();
 
@@ -1146,6 +1173,11 @@ function guardarCorcho() {
         return;
     }
 
+    if (stockMinimo < 0 || !Number.isFinite(stockMinimo)) {
+    alert("El stock mínimo no puede ser negativo.");
+    return;
+}
+
 
     if (productoEditando) {
 
@@ -1165,6 +1197,7 @@ function guardarCorcho() {
         producto.tipo = tipo;
         producto.lote = lote;
         producto.caracteristicas = caracteristicas;
+        producto.stockMinimo = stockMinimo;
         if (!actualizarStockInicialDesdeProducto("corchos", producto, stock)) {
     return;
 }
@@ -1195,6 +1228,8 @@ function guardarCorcho() {
         lote: lote,
 
         caracteristicas: caracteristicas,
+
+        stockMinimo: stockMinimo,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -1253,6 +1288,8 @@ function cerrarFormularioCorcho() {
     document.getElementById(
         "corcho-stock"
     ).value = 0;
+
+    document.getElementById("corcho-stock-minimo").value = 0;
 
     document.getElementById("corcho-lote").value = "";
 
@@ -1349,8 +1386,17 @@ function dibujarCorchos() {
         productos.map(
             function (producto) {
 
+                const stock =
+    Number(producto.stock) || 0;
+
+const stockMinimo =
+    Number(producto.stockMinimo) || 0;
+
+const stockBajo =
+    stockMinimo > 0 && stock <= stockMinimo;
+
                 return `
-                    <tr>
+                    <tr class="${stockBajo ? 'stock-bajo' : ''}">
 
                         <td>
                             ${escaparHTML(producto.marca)}
@@ -1365,8 +1411,9 @@ function dibujarCorchos() {
                         </td>
 
                         <td class="stock">
-                            ${formatearNumero(producto.stock)}
-                        </td>
+    ${stockBajo ? '⚠️ ' : ''}
+    ${formatearNumero(stock)}
+</td>
 
                         <td>
                             ${escaparHTML(producto.lote || "")}
@@ -1551,6 +1598,9 @@ function abrirFormularioCaja(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("caja-stock-minimo").value =
+    producto ? (producto.stockMinimo || 0) : 0;
+
             document.getElementById(
     "caja-caracteristicas"
 ).value =
@@ -1605,6 +1655,9 @@ function guardarCaja() {
             ).value
         );
 
+        const stockMinimo =
+    Number(document.getElementById("caja-stock-minimo").value);
+
         const caracteristicas =
     document.getElementById(
         "caja-caracteristicas"
@@ -1630,6 +1683,11 @@ function guardarCaja() {
         return;
     }
 
+    if (stockMinimo < 0 || !Number.isFinite(stockMinimo)) {
+    alert("El stock mínimo no puede ser negativo.");
+    return;
+}
+
 
     if (productoEditando) {
 
@@ -1649,6 +1707,7 @@ function guardarCaja() {
         producto.modelo = modelo;
         producto.unidades = unidades;
         producto.caracteristicas = caracteristicas;
+        producto.stockMinimo = stockMinimo;
         if (!actualizarStockInicialDesdeProducto("cajas", producto, stock)) {
     return;
 }
@@ -1677,6 +1736,8 @@ function guardarCaja() {
         unidades: unidades,
 
         stock: stock,
+
+        stockMinimo: stockMinimo,
 
         caracteristicas: caracteristicas,
 
@@ -1741,6 +1802,8 @@ function cerrarFormularioCaja() {
     document.getElementById(
         "caja-stock"
     ).value = 0;
+
+    document.getElementById("caja-stock-minimo").value = 0;
 
     document.getElementById(
     "caja-caracteristicas"
@@ -1839,6 +1902,12 @@ function dibujarCajas() {
                 const stock =
                     Number(producto.stock) || 0;
 
+                    const stockMinimo =
+    Number(producto.stockMinimo) || 0;
+
+const stockBajo =
+    stockMinimo > 0 && stock <= stockMinimo;
+
                 const unidades =
                     Number(
                         String(producto.unidades || "")
@@ -1850,7 +1919,7 @@ function dibujarCajas() {
 
 
                 return `
-                    <tr>
+                    <tr class="${stockBajo ? 'stock-bajo' : ''}">
 
                         <td>
                             ${escaparHTML(producto.marca)}
@@ -1869,9 +1938,10 @@ function dibujarCajas() {
                             botellas
                         </td>
 
-                        <td class="stock">
-                            ${formatearNumero(stock)}
-                        </td>
+                      <td class="stock">
+    ${stockBajo ? '⚠️ ' : ''}
+    ${formatearNumero(stock)}
+</td>
 
                         <td>
                             ${escaparHTML(producto.caracteristicas || "")}
@@ -2050,6 +2120,9 @@ function abrirFormularioCapsula(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("capsula-stock-minimo").value =
+    producto ? (producto.stockMinimo || 0) : 0;
+
             document.getElementById(
     "capsula-caracteristicas"
 ).value =
@@ -2098,6 +2171,9 @@ function guardarCapsula() {
             ).value
         );
 
+        const stockMinimo =
+    Number(document.getElementById("capsula-stock-minimo").value);
+
         const caracteristicas =
     document.getElementById(
         "capsula-caracteristicas"
@@ -2123,6 +2199,11 @@ function guardarCapsula() {
         return;
     }
 
+    if (stockMinimo < 0 || !Number.isFinite(stockMinimo)) {
+    alert("El stock mínimo no puede ser negativo.");
+    return;
+}
+
 
     if (productoEditando) {
 
@@ -2141,6 +2222,7 @@ function guardarCapsula() {
         producto.tipo = tipo;
         producto.modelo = modelo;
         producto.caracteristicas = caracteristicas;
+        producto.stockMinimo = stockMinimo;
         if (!actualizarStockInicialDesdeProducto("capsulas", producto, stock)) {
     return;
 }
@@ -2167,6 +2249,8 @@ function guardarCapsula() {
         modelo: modelo,
 
         stock: stock,
+
+        stockMinimo: stockMinimo,
 
         caracteristicas: caracteristicas,
 
@@ -2227,6 +2311,8 @@ function cerrarFormularioCapsula() {
     document.getElementById(
         "capsula-stock"
     ).value = 0;
+
+    document.getElementById("capsula-stock-minimo").value = 0;
 
     document.getElementById(
     "capsula-caracteristicas"
@@ -2319,14 +2405,23 @@ function dibujarCapsulas() {
         productos.map(
             function (producto) {
 
+                const stock =
+    Number(producto.stock) || 0;
+
+const stockMinimo =
+    Number(producto.stockMinimo) || 0;
+
+const stockBajo =
+    stockMinimo > 0 && stock <= stockMinimo;
+
                 return `
-                    <tr>
+                    <tr class="${stockBajo ? 'stock-bajo' : ''}">
 
                         <td>
                             ${escaparHTML(producto.marca)}
                         </td>
 
-                        <td>
+                         <td>
                             ${escaparHTML(producto.tipo)}
                         </td>
 
@@ -2334,9 +2429,10 @@ function dibujarCapsulas() {
                             ${escaparHTML(producto.modelo)}
                         </td>
 
-                        <td class="stock">
-                            ${formatearNumero(producto.stock)}
-                        </td>
+                       <td class="stock">
+    ${stockBajo ? '⚠️ ' : ''}
+    ${formatearNumero(stock)}
+</td>
 
                         <td>
     ${escaparHTML(producto.caracteristicas || "")}
@@ -2535,6 +2631,9 @@ function abrirFormularioEtiqueta(producto = null) {
             ? producto.stock
             : 0;
 
+            document.getElementById("etiqueta-stock-minimo").value =
+    producto ? (producto.stockMinimo || 0) : 0;
+
             document.getElementById(
     "etiqueta-caracteristicas"
 ).value =
@@ -2595,6 +2694,9 @@ function guardarEtiqueta() {
             ).value
         );
 
+        const stockMinimo =
+    Number(document.getElementById("etiqueta-stock-minimo").value);
+
         const caracteristicas =
     document.getElementById(
         "etiqueta-caracteristicas"
@@ -2630,6 +2732,11 @@ if (
         return;
     }
 
+    if (stockMinimo < 0 || !Number.isFinite(stockMinimo)) {
+    alert("El stock mínimo no puede ser negativo.");
+    return;
+}
+
     const anadaGuardar =
     esTrasera ? anada : "";
 
@@ -2656,6 +2763,7 @@ const loteGuardar =
         producto.anada = anadaGuardar;
 producto.lote = loteGuardar;
 producto.caracteristicas = caracteristicas;
+producto.stockMinimo = stockMinimo;
 if (!actualizarStockInicialDesdeProducto("etiquetas", producto, stock)) {
     return;
 }
@@ -2687,6 +2795,8 @@ lote: loteGuardar,
         stock: stock,
 
         caracteristicas: caracteristicas,
+
+        stockMinimo: stockMinimo,
 
         fechaCreacion:
             obtenerFechaHora().timestamp
@@ -2753,6 +2863,8 @@ function cerrarFormularioEtiqueta() {
     document.getElementById(
         "etiqueta-stock"
     ).value = 0;
+
+    document.getElementById("etiqueta-stock-minimo").value = 0;
 
     document.getElementById(
     "etiqueta-caracteristicas"
@@ -2859,8 +2971,17 @@ function dibujarEtiquetas() {
         productos.map(
             function (producto) {
 
+                const stock =
+    Number(producto.stock) || 0;
+
+const stockMinimo =
+    Number(producto.stockMinimo) || 0;
+
+const stockBajo =
+    stockMinimo > 0 && stock <= stockMinimo;
+
                 return `
-                    <tr>
+                    <tr class="${stockBajo ? 'stock-bajo' : ''}">
 
                         <td>
                             ${escaparHTML(producto.marca)}
@@ -2883,8 +3004,9 @@ function dibujarEtiquetas() {
                         </td>
 
                         <td class="stock">
-                            ${formatearNumero(producto.stock)}
-                        </td>
+    ${stockBajo ? '⚠️ ' : ''}
+    ${formatearNumero(stock)}
+</td>
 
                         <td>
     ${escaparHTML(producto.caracteristicas || "")}

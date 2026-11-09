@@ -1433,3 +1433,28 @@ td.stock {
     }
 
 }
+
+/* =========================================================
+   AVISO DE STOCK BAJO
+========================================================= */
+
+tr.stock-bajo td {
+    background-color: #ffe1e1 !important;
+    color: #a00000;
+}
+
+tr.stock-bajo td.stock {
+    color: #c00000;
+    font-weight: bold;
+}
+
+/* ICONOS DEL MENÚ PRINCIPAL */
+
+.menu-principal .boton-menu img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 5px;
+}
+

@@ -43,43 +43,37 @@
 
     <nav class="menu-principal">
 
-        <button class="boton-menu activo"
-                data-seccion="inicio">
-            🏠
-            <span>Inicio</span>
-        </button>
+    <button class="boton-menu activo" data-seccion="inicio">
+        🏠
+        <span>Inicio</span>
+    </button>
 
-        <button class="boton-menu"
-                data-seccion="botellas">
-            🍾
-            <span>Botellas</span>
-        </button>
+    <button class="boton-menu" data-seccion="botellas">
+        <img src="imagenes/botella.png" alt="Botella">
+        <span>Botellas</span>
+    </button>
 
-        <button class="boton-menu"
-                data-seccion="corchos">
-            🪵
-            <span>Corchos</span>
-        </button>
+    <button class="boton-menu" data-seccion="corchos">
+        <img src="imagenes/corcho.png" alt="Corcho">
+        <span>Corchos</span>
+    </button>
 
-        <button class="boton-menu"
-                data-seccion="cajas">
-            📦
-            <span>Cajas</span>
-        </button>
+    <button class="boton-menu" data-seccion="cajas">
+        <img src="imagenes/caja.png" alt="Caja">
+        <span>Cajas</span>
+    </button>
 
-        <button class="boton-menu"
-                data-seccion="capsulas">
-            🏷️
-            <span>Cápsulas</span>
-        </button>
+    <button class="boton-menu" data-seccion="capsulas">
+        <img src="imagenes/capsula.png" alt="Cápsula">
+        <span>Cápsulas</span>
+    </button>
 
-        <button class="boton-menu"
-                data-seccion="etiquetas">
-            🏷️
-            <span>Etiquetas</span>
-        </button>
+    <button class="boton-menu" data-seccion="etiquetas">
+        <img src="imagenes/etiqueta.png" alt="Etiqueta">
+        <span>Etiquetas</span>
+    </button>
 
-    </nav>
+</nav>
 
 
     <!-- =====================================================
@@ -406,6 +400,21 @@
                     </div>
 
                     <div class="campo">
+
+    <label for="botella-stock-minimo">
+        Stock Mínimo
+    </label>
+
+    <input type="number"
+           id="botella-stock-minimo"
+           min="0"
+           step="1"
+           value="0"
+           placeholder="Cantidad mínima">
+
+</div>
+
+                    <div class="campo">
     <label for="botella-lote">Lote</label>
     <input type="text" id="botella-lote" placeholder="Introduce el lote">
 </div>
@@ -725,6 +734,21 @@
 
                     </div>
 
+                    <div class="campo">
+
+    <label for="corcho-stock-minimo">
+        Stock Mínimo
+    </label>
+
+    <input type="number"
+           id="corcho-stock-minimo"
+           min="0"
+           step="1"
+           value="0"
+           placeholder="Cantidad mínima">
+
+</div>
+
                 </div>
 
 
@@ -1039,6 +1063,21 @@
 
                     </div>
 
+                    <div class="campo">
+
+    <label for="caja-stock-minimo">
+        Stock Mínimo
+    </label>
+
+    <input type="number"
+           id="caja-stock-minimo"
+           min="0"
+           step="1"
+           value="0"
+           placeholder="Cantidad mínima">
+
+</div>
+
                 </div>
 
 
@@ -1334,6 +1373,21 @@
                                value="0">
 
                     </div>
+
+                    <div class="campo">
+
+    <label for="capsula-stock-minimo">
+        Stock Mínimo
+    </label>
+
+    <input type="number"
+           id="capsula-stock-minimo"
+           min="0"
+           step="1"
+           value="0"
+           placeholder="Cantidad mínima">
+
+</div>
 
                 </div>
 
@@ -1664,6 +1718,21 @@
                                value="0">
 
                     </div>
+
+                    <div class="campo">
+
+    <label for="etiqueta-stock-minimo">
+        Stock Mínimo
+    </label>
+
+    <input type="number"
+           id="etiqueta-stock-minimo"
+           min="0"
+           step="1"
+           value="0"
+           placeholder="Cantidad mínima">
+
+</div>
 
                 </div>
 
